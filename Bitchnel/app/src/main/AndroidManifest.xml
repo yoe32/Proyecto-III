@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dejiitaru.bitchnel" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="22" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
+
+    <application
+        android:name="com.dejiitaru.bitchnel.app.AppController"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider1643524615859918"
+            android:exported="true" />
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name=".login.IntroLogin"
+            android:label="@string/btn_intro_login"
+            android:screenOrientation="locked"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+>>>>>>> origin/master
+        </activity>
+        <activity
+<<<<<<< HEAD
+<<<<<<< HEAD
+            android:name=".restaurant.RestaurantProfileActivity"
+            android:label="@string/title_activity_restaurant_profile" >
+        </activity>
+        <activity
+            android:name=".login.GoogleLogin"
+            android:label="@string/google_app_name" >
+=======
+=======
+>>>>>>> origin/master
+            android:name="com.dejiitaru.bitchnel.restaurant.RestaurantProfileActivity"
+            android:label="@string/title_activity_restaurant_profile">
+
+        </activity>
+
+
+        <activity android:name=".login.GoogleLogin"
+            android:label="@string/google_app_name">
+
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
+>>>>>>> origin/master
+        </activity>
+        <activity
+            android:name=".login.FacebookLogin"
+            android:label="@string/facebook_app_name" >
+        </activity>
+        <activity
+            android:name=".TesterActivity"
+            android:label="@string/title_activity_tester" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+<<<<<<< HEAD
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+=======
+
+        <activity android:name=".login.FacebookLogin"
+            android:label="@string/facebook_app_name"
+            android:theme="@style/Theme.AppCompat.Light">
+
+
+        </activity>
+
+
+         </application>
+>>>>>>> origin/master
+
+</manifest>

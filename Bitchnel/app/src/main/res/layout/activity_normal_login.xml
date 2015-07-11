@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="250dp"
+    android:layout_height="250dp"
+    android:clickable="true"
+    android:layout_gravity="center">
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/google_intro_login"
+        android:layout_marginTop="50dp"
+        android:layout_width="260dp"
+        android:layout_height="37dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/failbook_intro_login"
+        android:layout_width="250dp"
+        android:layout_height="37dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="@string/btn_intro_facebook"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/normal_login"
+        android:layout_marginTop="50dp"
+        android:layout_width="260dp"
+        android:layout_height="37dp"
+        android:layout_gravity="center"
+        android:text="@string/btn_intro_login"/>
+
+
+</LinearLayout>
