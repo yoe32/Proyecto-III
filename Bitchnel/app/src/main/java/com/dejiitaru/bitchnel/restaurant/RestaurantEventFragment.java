@@ -1,8 +1,8 @@
 package com.dejiitaru.bitchnel.restaurant;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
+import com.dejiitaru.bitchnel.R;
+
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,15 +21,11 @@ public class RestaurantEventFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-<<<<<<< HEAD
-<<<<<<< HEAD:Bitchnel/app/src/main/java/com/dejiitaru/bitchnel/Restaurant/RestaurantEventFragment.java
+
+
         View rootView = inflater.inflate(R.layout.fragment_restaurant_event, container, false);
-=======
-        View rootView = inflater.inflate(R.layout.fragment_four, container, false);
->>>>>>> origin/master:Bitchnel/app/src/main/java/com/dejiitaru/bitchnel/Restaurant/FourFragment.java
-=======
-        View rootView = inflater.inflate(R.layout.fragment_restaurant_event, container, false);
->>>>>>> origin/master
+
+
         return rootView;
     }
 }

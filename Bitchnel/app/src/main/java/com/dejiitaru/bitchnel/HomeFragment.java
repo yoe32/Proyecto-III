@@ -10,14 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 import com.dejiitaru.bitchnel.R;
->>>>>>> origin/master
-=======
+
 import com.dejiitaru.bitchnel.R;
->>>>>>> origin/master
+
 import com.dejiitaru.bitchnel.restaurant.RestaurantProfileActivity;
 
 public class HomeFragment extends Fragment
@@ -34,8 +31,6 @@ public class HomeFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         btnRest = (Button)rootView.findViewById(R.id.btn_restaurant);
 
         btnRest.setOnClickListener(new View.OnClickListener()
@@ -48,10 +43,7 @@ public class HomeFragment extends Fragment
                 startActivity(intent);
             }
         });
-=======
->>>>>>> origin/master
-=======
->>>>>>> origin/master
+
         return rootView;
     }
 }

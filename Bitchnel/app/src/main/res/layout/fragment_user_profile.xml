@@ -35,7 +35,9 @@
             <!-- Logo Ends -->
         </LinearLayout>
         <!--  Header Ends -->
-                <!-- Footer Start -->
+        <!--  Header Ends -->
+
+        <!-- Footer Start -->
         <!-- Place footer next to header to set z-index property to minus value -->
         <LinearLayout android:id="@+id/footer"
             android:orientation="horizontal"
@@ -46,8 +48,11 @@
         </LinearLayout>
         <!-- Footer Ends -->
 
+        <!-- Login Form -->
 
-         <!-- Login Form -->
+        <!-- Login Form -->
+
+        <!-- Login Form -->
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -57,118 +62,115 @@
             android:padding="20dip"
             android:layout_below="@id/header"
             android:id="@+id/linearLayout">
-        <!--  Email Label -->
+            <!--  Email Label -->
 
-        <TextView android:layout_width="fill_parent"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textColor="#FFFFFF"
-            android:text="Username" />
+            <TextView android:layout_width="fill_parent"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="#FFFFFF"
+                android:text="Username" />
 
-        <!--  Password Label -->
-        <TextView android:layout_width="fill_parent"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textColor="#FFFFFF"
-            android:text="Email"/>
+            <!--  Password Label -->
+            <TextView android:layout_width="fill_parent"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="#FFFFFF"
+                android:text="Email"/>
 
-        <TextView android:layout_width="fill_parent"
-            android:layout_marginTop="30dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:textSize="30dp"
-            android:textColor="#FFFFFF"
-            android:text="Phone Number"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_marginTop="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:textSize="30dp"
+                android:textColor="#FFFFFF"
+                android:text="Phone Number"/>
 
-        <TextView android:layout_width="fill_parent"
-            android:layout_marginTop="30dp"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textColor="#FFFFFF"/>
+            <TextView android:layout_width="fill_parent"
+                android:layout_marginTop="30dp"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="#FFFFFF"/>
 
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="fill_parent"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textColor="#000000"
-            android:text="Username" />
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:text="Username" />
 
-        <!--  Password Label -->
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="fill_parent"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textColor="#000000"
-            android:text="Email"/>
+            <!--  Password Label -->
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:text="Email"/>
 
-        <TextView
-            android:id="@+id/phone"
-            android:layout_width="fill_parent"
-            android:layout_marginTop="70dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:textSize="30dp"
-            android:textColor="#000000"
-            android:text="Phone Number"/>
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:text="Phone Number"/>
 
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="fill_parent"
-            android:layout_marginTop="70dp"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textColor="#000000"
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="70dp"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="#000000" />
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:text="Username" />
 
+            <!--  Password Label -->
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:text="Email"/>
 
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="fill_parent"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textColor="#000000"
-            android:text="Username" />
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:text="Phone Number"/>
 
-        <!--  Password Label -->
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="fill_parent"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textColor="#000000"
-            android:text="Email"/>
-
-        <TextView
-            android:id="@+id/phone"
-            android:layout_width="fill_parent"
-            android:layout_marginTop="70dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:textSize="30dp"
-            android:textColor="#000000"
-            android:text="Phone Number"/>
-
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="fill_parent"
-            android:layout_marginTop="70dp"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textColor="#000000"
->>>>>>> origin/master
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="70dp"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="#000000"
             android:text="Adress"/>
 
         </LinearLayout>
