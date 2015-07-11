@@ -28,16 +28,9 @@ import com.facebook.share.widget.ShareDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 public class FacebookLogin extends Activity
 {
-=======
-=======
->>>>>>> origin/master
-public class FacebookLogin extends Activity {
-
->>>>>>> origin/master
     CallbackManager callbackManager;
     ShareDialog shareDialog;
     LoginButton login;

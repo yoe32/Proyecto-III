@@ -6,25 +6,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsoluteLayout;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
-/**
- * Created by Usuario on 7/11/2015.
- */
+import com.facebook.login.widget.LoginButton;
+
 public class UserPostActivity extends Fragment {
 
-
+    private Button btnSignOut;
+    LoginButton login;
 public UserPostActivity(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_login_google_failbook, container, false);
+        View rootView = inflater.inflate(R.layout.activity_google_facebook_user_post, container, false);
+        rootView.setOnClickListener(null);
 
         return rootView;
+
     }
-      public void goToAttach(View v){
-        Intent intent = new Intent(getActivity(),MainActivity.class);
-        startActivity(intent);
-    }
+
 
 
 }

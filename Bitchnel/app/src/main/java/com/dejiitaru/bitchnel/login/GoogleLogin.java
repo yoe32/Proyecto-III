@@ -167,8 +167,7 @@ public class GoogleLogin extends Activity implements OnClickListener,
         // Update the UI after signin
         updateUI(true);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
             Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
             String personName = currentPerson.getDisplayName();
@@ -178,12 +177,8 @@ public class GoogleLogin extends Activity implements OnClickListener,
         Intent intent = new Intent(GoogleLogin.this,MainActivity.class);
         startActivity(intent);
     }
-=======
->>>>>>> origin/master
-=======
->>>>>>> origin/master
 
-    }
+
     @Nullable
     @Override
     public void onConnectionSuspended(int arg0) {
