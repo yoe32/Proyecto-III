@@ -54,33 +54,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
->>>>>>> origin/master
+
         </activity>
         <activity
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             android:name=".restaurant.RestaurantProfileActivity"
             android:label="@string/title_activity_restaurant_profile" >
         </activity>
         <activity
             android:name=".login.GoogleLogin"
             android:label="@string/google_app_name" >
-=======
-=======
->>>>>>> origin/master
-            android:name="com.dejiitaru.bitchnel.restaurant.RestaurantProfileActivity"
-            android:label="@string/title_activity_restaurant_profile">
 
         </activity>
-
 
         <activity android:name=".login.GoogleLogin"
             android:label="@string/google_app_name">
 
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
         </activity>
         <activity
             android:name=".login.FacebookLogin"
@@ -92,22 +81,12 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-<<<<<<< HEAD
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-=======
-
-        <activity android:name=".login.FacebookLogin"
-            android:label="@string/facebook_app_name"
-            android:theme="@style/Theme.AppCompat.Light">
 
 
-        </activity>
-
-
-         </application>
->>>>>>> origin/master
 
 </manifest>

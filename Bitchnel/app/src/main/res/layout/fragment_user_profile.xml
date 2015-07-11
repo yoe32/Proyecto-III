@@ -35,11 +35,7 @@
             <!-- Logo Ends -->
         </LinearLayout>
         <!--  Header Ends -->
-        <!--  Header Ends -->
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <!-- Footer Start -->
+                <!-- Footer Start -->
         <!-- Place footer next to header to set z-index property to minus value -->
         <LinearLayout android:id="@+id/footer"
             android:orientation="horizontal"
@@ -50,13 +46,9 @@
         </LinearLayout>
         <!-- Footer Ends -->
 
-        <!-- Login Form -->
-=======
+
          <!-- Login Form -->
->>>>>>> origin/master
-=======
-         <!-- Login Form -->
->>>>>>> origin/master
+
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
@@ -66,8 +58,7 @@
             android:layout_below="@id/header"
             android:id="@+id/linearLayout">
         <!--  Email Label -->
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         <TextView android:layout_width="fill_parent"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
@@ -97,8 +88,8 @@
             android:layout_marginTop="30dp"
             android:layout_height="wrap_content"
             android:textSize="30dp"
-            android:textColor="#FFFFFF"
-=======
+            android:textColor="#FFFFFF"/>
+
         <TextView
             android:id="@+id/username"
             android:layout_width="fill_parent"
@@ -137,8 +128,8 @@
             android:layout_height="wrap_content"
             android:textSize="30dp"
             android:textColor="#000000"
->>>>>>> origin/master
-=======
+
+
         <TextView
             android:id="@+id/username"
             android:layout_width="fill_parent"

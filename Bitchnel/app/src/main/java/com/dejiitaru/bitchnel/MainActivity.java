@@ -305,7 +305,7 @@ public class MainActivity extends Activity
 			//	fragment = new UserPostActivity();
 				break;
 			case 1:
-
+				fragment = new HomeFragment();
 				break;
 
 			case 2:
