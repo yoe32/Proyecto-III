@@ -5,8 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
-
+import Main.Menu;
 import Main.Restaurant;
+import Main.Event;
 
 public class RestaurantService extends Service
 {
@@ -35,7 +36,51 @@ public class RestaurantService extends Service
         
         desconectar();
 	}
+	public void insertMenu(Menu menu){
+		
+		conectar();
+		
+		try{
+		PreparedStatement ps = getConexion().prepareStatement("INSERT INTO restaurant_product (menu_product,menu_descripcion,menu_img)values(?,?,?)");
+		ps.setString(1, menu.getMenu_Product());
+		ps.setString(2,menu.getMenu_Descripcion());
+		ps.setBytes(3, menu.getMenu_Img());
+		  ps.executeUpdate();
+          
+          if (ps != null) {
+              ps.close();
+          }
+
+      } catch (SQLException e) {
+          e.printStackTrace();
+      }
+      
+      desconectar();
+	}
 	
+
+public void insertEvent(Event event){
+	
+	conectar();
+	
+	try{
+	PreparedStatement ps = getConexion().prepareStatement("INSERT INTO restaurant_event (event_name,event_descripcion,event_contact)values(?,?,?)");
+	ps.setString(1, event.getEvent_Name());
+	ps.setString(2,event.getEvent_Descripcion());
+	ps.setString(3, event.getEvent_Contact());
+	  ps.executeUpdate();
+      
+      if (ps != null) {
+          ps.close();
+      }
+
+  } catch (SQLException e) {
+      e.printStackTrace();
+  }
+  
+  desconectar();
+}
+}
 	
 //	public void registerNormal(Normal normal)
 //	{
@@ -220,4 +265,4 @@ public class RestaurantService extends Service
 //        
 //        desconectar();
 //	}
-}
+
