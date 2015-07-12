@@ -46,20 +46,20 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
             if(err) {
                 res.json({"Error" : true, "Message" : "Error executing MySQL query"});
             } else {
-                res.json({"Error" : false, "Message" : "Success", "restaurant_profile" : rows});
+                res.json({"Error" : false, "Message" : "Success", "restaurant_gallery" : rows});
             }
         });
     });
 
     router.get("/restaurants/menu/:restaurant_profile_id",function(req,res){
-        var query = "SELECT restaurant_menu_id,restaurant_menu_product,restaurant_menu_description,restaurant_location,restaurant_img FROM ?? WHERE ??=?";
+        var query = "SELECT restaurant_product_id,product_description,product_price,product_img, FROM ?? WHERE ??=?";
         var table = ["restaurant_menu","restaurant_profile_id",req.params.restaurant_profile_id];
         query = mysql.format(query,table);
         connection.query(query,function(err,rows){
             if(err) {
                 res.json({"Error" : true, "Message" : "Error executing MySQL query"});
             } else {
-                res.json({"Error" : false, "Message" : "Success", "restaurant_profile" : rows});
+                res.json({"Error" : false, "Message" : "Success", "restaurant_product" : rows});
             }
         });
     });
