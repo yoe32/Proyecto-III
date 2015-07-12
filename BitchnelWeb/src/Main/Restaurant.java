@@ -2,7 +2,7 @@ package Main;
 
 public class Restaurant 
 {
-	private int restaurant_id;
+	private int restaurant_profile_id;
 	private String restaurant_name;
 	private String restaurant_email;
 	private String restaurant_password;
@@ -10,11 +10,11 @@ public class Restaurant
 	private String restaurant_location;
 	private byte[] restaurant_img;
 	
-	public int getRestaurant_id() {
-		return restaurant_id;
+	public int getRestaurant_profile_id() {
+		return restaurant_profile_id;
 	}
-	public void setRestaurant_id(int restaurant_id) {
-		this.restaurant_id = restaurant_id;
+	public void setRestaurant_profile_id(int restaurant_id) {
+		this.restaurant_profile_id = restaurant_id;
 	}
 	public String getRestaurant_name() {
 		return restaurant_name;
