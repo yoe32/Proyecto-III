@@ -19,25 +19,52 @@ REST_ROUTER.prototype.handleRoutes = function(router,connection,md5) {
             if(err) {
                 res.json({"Error" : true, "Message" : "Error executing MySQL query"});
             } else {
-                res.json({"Error" : false, "Message" : "Success", 
-                    "restaurant_profile" : rows
+                res.json({"Error" : false, "Message" : "Success", "restaurant_profile" : rows
                 });
             }
         });
     });
 
-    router.get("/users/:user_id",function(req,res){
-        var query = "SELECT * FROM ?? WHERE ??=?";
-        var table = ["user_login","user_id",req.params.user_id];
+    router.get("/restaurants/:restaurant_profile_id",function(req,res){
+        var query = "SELECT restaurant_profile_id,restaurant_name,restaurant_description,restaurant_location,restaurant_img FROM ?? WHERE ??=?";
+        var table = ["restaurant_profile","restaurant_profile_id",req.params.restaurant_profile_id];
         query = mysql.format(query,table);
         connection.query(query,function(err,rows){
             if(err) {
                 res.json({"Error" : true, "Message" : "Error executing MySQL query"});
             } else {
-                res.json({"Error" : false, "Message" : "Success", "Users" : rows});
+                res.json({"Error" : false, "Message" : "Success", "restaurant_profile" : rows});
             }
         });
     });
+
+    router.get("/restaurants/gallery/:restaurant_profile_id",function(req,res){
+        var query = "SELECT restaurant_gallery_id,restaurant_picture FROM ?? WHERE ??=?";
+        var table = ["restaurant_gallery","restaurant_profile_id",req.params.restaurant_profile_id];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+            } else {
+                res.json({"Error" : false, "Message" : "Success", "restaurant_profile" : rows});
+            }
+        });
+    });
+
+    router.get("/restaurants/menu/:restaurant_profile_id",function(req,res){
+        var query = "SELECT restaurant_menu_id,restaurant_menu_product,restaurant_menu_description,restaurant_location,restaurant_img FROM ?? WHERE ??=?";
+        var table = ["restaurant_menu","restaurant_profile_id",req.params.restaurant_profile_id];
+        query = mysql.format(query,table);
+        connection.query(query,function(err,rows){
+            if(err) {
+                res.json({"Error" : true, "Message" : "Error executing MySQL query"});
+            } else {
+                res.json({"Error" : false, "Message" : "Success", "restaurant_profile" : rows});
+            }
+        });
+    });
+
+
 
     router.post("/users",function(req,res){
         var query = "INSERT INTO ??(??,??) VALUES (?,?)";
