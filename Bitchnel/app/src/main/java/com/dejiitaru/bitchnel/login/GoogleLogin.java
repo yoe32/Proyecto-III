@@ -174,8 +174,8 @@ public class GoogleLogin extends Activity implements OnClickListener,
             String personGooglePlusProfile = currentPerson.getUrl();
         }
 
-        Intent intent = new Intent(GoogleLogin.this,MainActivity.class);
-        startActivity(intent);
+       // Intent intent = new Intent(GoogleLogin.this,MainActivity.class);
+        //startActivity(intent);
     }
 
 
@@ -191,14 +191,16 @@ public class GoogleLogin extends Activity implements OnClickListener,
      * */
     private void updateUI(boolean isSignedIn) {
         if (isSignedIn) {
-            btnSignIn.setVisibility(View.GONE);
-            btnSignOut.setVisibility(View.VISIBLE);
             llProfileLayout.setVisibility(View.VISIBLE);
+            btnSignIn.setVisibility(View.GONE);
+
+
 
         } else {
-            btnSignIn.setVisibility(View.VISIBLE);
-            btnSignOut.setVisibility(View.GONE);
             llProfileLayout.setVisibility(View.GONE);
+            btnSignIn.setVisibility(View.VISIBLE);
+
+
         }
     }
 
