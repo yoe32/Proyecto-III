@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<title></title>
+
+	<h:outputStylesheet library="css" name="style.css" />
+
+	<h:outputScript library="js" name="jquery-2.1.3.js" />
+
+</h:head>
+
+
+<!-- BEGIN BODY -->
+<h:body class="login">
+	<div class="container">
+
+    <form id="signup">
+
+        <div class="header">
+        
+            <h3>Sign Up</h3>
+            
+            
+        </div>
+        
+        <div class="sep"></div>
+
+	<h:form>
+        <div class="inputs">
+        
+        
+        	<h3>Register Restaurant</h3>
+        	
+            <input type="text" placeholder="Name" value="#{registerBean.name}" required="true"/>
+            
+            <input type="email" placeholder="e-mail" value="#{registerBean.email}" required="true"/>
+            
+            <input type="password" placeholder="Password" value="#{registerBean.password}" required="true"/>
+            
+            <input type="text" placeholder="Description" value="#{registerBean.description}" required="true"/>
+            
+            <input type="text" placeholder="Location" value="#{registerBean.location}" required="true"/>
+             
+            <input type="text" placeholder="Phone 1" value="#{registerBean.phone_i}" required="true"/>
+            
+            <input type="text" placeholder="Phone 2" value="#{registerBean.phone_ii}" required="true"/>
+            
+            <input type="text" placeholder="Phone 3" value="#{registerBean.phone_iii}" required="true"/>
+            
+            <h:commandButton id="submit" value="Register Now!" action="#{registerBean.register(registerBean.email,registerBean.password,registerBean.description,registerBean.location,registerBean.phone_i,registerBean.phone_ii,registerBean.phone_iii)}"/>
+             
+        </div>
+        </h:form>
+
+    </form>
+
+</div>
+​
+</h:body>
+<!-- END BODY -->
+
+</html>

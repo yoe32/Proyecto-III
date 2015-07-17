@@ -6,30 +6,30 @@ import Main.Restaurant;
 
 public class Tester {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		// TODO Auto-generated method stub
-		
-		Restaurant res = new Restaurant();
-		
-		RestaurantService rs = new RestaurantService();
-		
-		Scanner scan = new Scanner(System.in);	
-		res.setRestaurant_profile_id(0);
-		System.out.println("profile name");
-		res.setRestaurant_name(scan.next());
-		System.out.println("profile email");
-		res.setRestaurant_email(scan.next());
-		System.out.println("profile password");
-		res.setRestaurant_password(scan.next());
-		System.out.println("profiles description");
-		res.setRestaurant_description(scan.next());
-		System.out.println("profile location");
-		res.setRestaurant_location(scan.next());
-		System.out.println("profile image");
-		res.setRestaurant_img(null);
-	
-		rs.registerRestaurant(res);
-scan.close();
-	}
 
+		Restaurant res = new Restaurant();
+
+		RestaurantService rs = new RestaurantService();
+
+		Scanner scan = new Scanner(System.in);	
+		res.setId(0);
+		System.out.println("profile name");
+		res.setName(scan.next());
+		System.out.println("profile email");
+		res.setEmail(scan.next());
+		System.out.println("profile password");
+		res.setPassword(scan.next());
+		System.out.println("profiles description");
+		res.setDescription(scan.next());
+		System.out.println("profile location");
+		res.setLocation(scan.next());
+		System.out.println("profile image");
+		res.setImg(null);
+
+		rs.registerRestaurant(res);
+		scan.close();
+	}
 }
