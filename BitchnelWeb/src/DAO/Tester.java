@@ -17,15 +17,21 @@ public class Tester {
 		Scanner scan = new Scanner(System.in);	
 		res.setId(0);
 		System.out.println("profile name");
-		res.setName(scan.next());
+		res.setName(scan.nextLine());
 		System.out.println("profile email");
-		res.setEmail(scan.next());
+		res.setEmail(scan.nextLine());
 		System.out.println("profile password");
-		res.setPassword(scan.next());
+		res.setPassword(scan.nextLine());
 		System.out.println("profiles description");
-		res.setDescription(scan.next());
+		res.setDescription(scan.nextLine());
 		System.out.println("profile location");
-		res.setLocation(scan.next());
+		res.setLocation(scan.nextLine());
+		System.out.println("profile phone 1");
+		res.setPhone_i(scan.nextInt());
+		System.out.println("profile phone 2");
+		res.setPhone_ii(scan.nextInt());
+		System.out.println("profile phone 3");
+		res.setPhone_iii(scan.nextInt());
 		System.out.println("profile image");
 		res.setImg(null);
 

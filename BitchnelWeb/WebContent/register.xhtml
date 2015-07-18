@@ -54,7 +54,7 @@
             
             <input type="text" placeholder="Phone 3" value="#{registerBean.phone_iii}" required="true"/>
             
-            <h:commandButton id="submit" value="Register Now!" action="#{registerBean.register(registerBean.email,registerBean.password,registerBean.description,registerBean.location,registerBean.phone_i,registerBean.phone_ii,registerBean.phone_iii)}"/>
+            <h:commandButton id="submit" value="Register Now!" action="#{registerBean.register()}"/>
              
         </div>
         </h:form>

@@ -110,5 +110,5 @@ public class Restaurant
 
 	public void setImg(byte[] img) {
 		this.img = img;
-	}	
+	}
 }
