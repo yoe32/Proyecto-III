@@ -8,9 +8,9 @@ public class Restaurant
 	private String password;
 	private String description;
 	private String location;
-	private int phone_i;
-	private int phone_ii;
-	private int phone_iii;
+	private int phonei;
+	private int phoneii;
+	private int phoneiii;
 	private byte[] img;
 	
 	public Restaurant()
@@ -18,17 +18,18 @@ public class Restaurant
 		
 	}
 	
-	public Restaurant(int id, String name, String email, String password, String description, String location, int phone_i, int phone_ii, int phone_iii, byte[] img)
+	public Restaurant(int id, String name, String email, String password, String description, String location, int phonei, int phoneii, int phoneiii, byte[] img)
 	{
+		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.description = description;
 		this.location = location;
-		this.phone_i = phone_i;
-		this.phone_ii = phone_ii;
-		this.phone_iii = phone_iii;
+		this.phonei = phonei;
+		this.phoneii = phoneii;
+		this.phoneiii = phoneiii;
 		this.img = img;
 	}
 
@@ -80,28 +81,28 @@ public class Restaurant
 		this.location = location;
 	}
 
-	public int getPhone_i() {
-		return phone_i;
+	public int getPhonei() {
+		return phonei;
 	}
 
-	public void setPhone_i(int phone_i) {
-		this.phone_i = phone_i;
+	public void setPhonei(int phonei) {
+		this.phonei = phonei;
 	}
 
-	public int getPhone_ii() {
-		return phone_ii;
+	public int getPhoneii() {
+		return phoneii;
 	}
 
-	public void setPhone_ii(int phone_ii) {
-		this.phone_ii = phone_ii;
+	public void setPhoneii(int phoneii) {
+		this.phoneii = phoneii;
 	}
 
-	public int getPhone_iii() {
-		return phone_iii;
+	public int getPhoneiii() {
+		return phoneiii;
 	}
 
-	public void setPhone_iii(int phone_iii) {
-		this.phone_iii = phone_iii;
+	public void setPhoneiii(int phoneiii) {
+		this.phoneiii = phoneiii;
 	}
 
 	public byte[] getImg() {

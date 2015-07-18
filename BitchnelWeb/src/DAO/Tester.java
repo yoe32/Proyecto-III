@@ -27,11 +27,11 @@ public class Tester {
 		System.out.println("profile location");
 		res.setLocation(scan.nextLine());
 		System.out.println("profile phone 1");
-		res.setPhone_i(scan.nextInt());
+		res.setPhonei(scan.nextInt());
 		System.out.println("profile phone 2");
-		res.setPhone_ii(scan.nextInt());
+		res.setPhoneii(scan.nextInt());
 		System.out.println("profile phone 3");
-		res.setPhone_iii(scan.nextInt());
+		res.setPhoneiii(scan.nextInt());
 		System.out.println("profile image");
 		res.setImg(null);
 

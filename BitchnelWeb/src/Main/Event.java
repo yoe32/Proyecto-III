@@ -2,43 +2,44 @@ package Main;
 
 public class Event {
 
-	private String event_name;
-	private String event_descripcion;
-	private String event_contact;
+	private String name;
+	private String descripcion;
+	private String contact;
 	
-	public Event(){}
+	public Event()
+	{
+		
+	}
 	
-	public Event(String name, String descripcion, String contact) {
+	public Event(String name, String descripcion, String contact)
+	{
 		super();
-		this.event_name = name;
-		this.event_descripcion = descripcion;
-		this.event_contact = contact;
+		this.name = name;
+		this.descripcion = descripcion;
+		this.contact = contact;
 	}
 
-	public String getEvent_Name() {
-		return event_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setEvent_Name(String name) {
-		this.event_name = name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getEvent_Descripcion() {
-		return event_descripcion;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setEvent_Descripcion(String descripcion) {
-		this.event_descripcion = descripcion;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
-	public String getEvent_Contact() {
-		return event_contact;
+	public String getContact() {
+		return contact;
 	}
 
-	public void setEvent_Contact(String contact) {
-		this.event_contact = contact;
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
-	
-	
-	
 }

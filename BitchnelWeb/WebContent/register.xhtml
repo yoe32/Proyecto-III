@@ -5,7 +5,8 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title></title>
@@ -31,34 +32,32 @@
         </div>
         
         <div class="sep"></div>
-
-	<h:form>
+	
         <div class="inputs">
         
-        
         	<h3>Register Restaurant</h3>
-        	
-            <input type="text" placeholder="Name" value="#{registerBean.name}" required="true"/>
+        	<h:form>
+            <h:inputText type="text" placeholder="Name" value="#{registerBean.name}" required="true"/>
             
-            <input type="email" placeholder="e-mail" value="#{registerBean.email}" required="true"/>
+            <h:inputText type="email" placeholder="e-mail" value="#{registerBean.email}" required="true"/>
             
-            <input type="password" placeholder="Password" value="#{registerBean.password}" required="true"/>
+            <h:inputSecret type="password" placeholder="Password" value="#{registerBean.password}" required="true"/>
             
-            <input type="text" placeholder="Description" value="#{registerBean.description}" required="true"/>
+            <h:inputText type="text" placeholder="Description" value="#{registerBean.description}" required="true"/>
             
-            <input type="text" placeholder="Location" value="#{registerBean.location}" required="true"/>
+            <h:inputText type="text" placeholder="Location" value="#{registerBean.location}" required="true"/>
              
-            <input type="text" placeholder="Phone 1" value="#{registerBean.phone_i}" required="true"/>
+            <h:inputText type="text" placeholder="Phone 1" value="#{registerBean.phonei}" required="true"/>
             
-            <input type="text" placeholder="Phone 2" value="#{registerBean.phone_ii}" required="true"/>
+            <h:inputText type="text" placeholder="Phone 2" value="#{registerBean.phoneii}" required="true"/>
             
-            <input type="text" placeholder="Phone 3" value="#{registerBean.phone_iii}" required="true"/>
+            <h:inputText type="text" placeholder="Phone 3" value="#{registerBean.phoneiii}" required="true"/>
+            
             
             <h:commandButton id="submit" value="Register Now!" action="#{registerBean.register()}"/>
+            </h:form>
              
         </div>
-        </h:form>
-
     </form>
 
 </div>

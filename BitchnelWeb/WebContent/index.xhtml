@@ -26,24 +26,21 @@
         <div class="header">
         
             <h3>Sign Up</h3>
-            
-            
         </div>
         
         <div class="sep"></div>
-
+        
+		<h:form>
         <div class="inputs">
         
-            <input type="email" placeholder="e-mail"/>
+           	<h:inputText type="email" placeholder="e-mail" value="#{loginBean.email}" required="true"/>
         
-            <input type="password" placeholder="Password" />
+            <h:inputSecret type="password" placeholder="password" value="#{loginBean.password}" required="true" />
             
-            
+            <h:commandButton id="submit" value="Login :D" action="#{loginBean.login(loginBean.email, loginBean.password)}"/>
             <a href="/BitchnelWeb/faces/register.xhtml">Register</a>
-            
-            <a id="submit" href="#">SIGN UP FOR INVITE NOW</a>
-        
         </div>
+        </h:form>
 
     </form>
 
