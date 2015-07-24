@@ -8,8 +8,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,21 +17,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dejiitaru.bitchnel.MainActivity;
+import com.facebook.FacebookSdk;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 import com.dejiitaru.bitchnel.R;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 import java.io.InputStream;
-import java.sql.Connection;
 
 public class GoogleLogin extends Activity implements OnClickListener,
         ConnectionCallbacks,OnConnectionFailedListener{
@@ -62,11 +60,11 @@ public class GoogleLogin extends Activity implements OnClickListener,
     private TextView txtName, txtEmail;
     private LinearLayout llProfileLayout;
 
-   @Nullable
-   @Override
+    @Nullable
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_google_facebook_user_post);
+        setContentView(R.layout.activity_main);
 
 
         btnSignIn = (SignInButton) findViewById(R.id.google_intro_login);
@@ -174,8 +172,8 @@ public class GoogleLogin extends Activity implements OnClickListener,
             String personGooglePlusProfile = currentPerson.getUrl();
         }
 
-       // Intent intent = new Intent(GoogleLogin.this,MainActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(GoogleLogin.this,MainActivity.class);
+        startActivity(intent);
     }
 
 
@@ -191,16 +189,14 @@ public class GoogleLogin extends Activity implements OnClickListener,
      * */
     private void updateUI(boolean isSignedIn) {
         if (isSignedIn) {
-            llProfileLayout.setVisibility(View.VISIBLE);
             btnSignIn.setVisibility(View.GONE);
-
-
+            btnSignOut.setVisibility(View.VISIBLE);
+            llProfileLayout.setVisibility(View.VISIBLE);
 
         } else {
-            llProfileLayout.setVisibility(View.GONE);
             btnSignIn.setVisibility(View.VISIBLE);
-
-
+            btnSignOut.setVisibility(View.GONE);
+            llProfileLayout.setVisibility(View.GONE);
         }
     }
 
@@ -253,10 +249,10 @@ public class GoogleLogin extends Activity implements OnClickListener,
                 txtName.setText(personName);
                 txtEmail.setText(email);
 
-                 //by default the profile url gives 50x50 px image only
-                 // we can replace the value with whatever dimension we want by
+                //by default the profile url gives 50x50 px image only
+                // we can replace the value with whatever dimension we want by
                 // replacing sz=X
-               personPhotoUrl = personPhotoUrl.substring(0,
+                personPhotoUrl = personPhotoUrl.substring(0,
                         personPhotoUrl.length() - 2)
                         + PROFILE_PIC_SIZE;
 

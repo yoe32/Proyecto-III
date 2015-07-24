@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,7 +42,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity
+public class MainActivity  extends Activity
 {
 	// Log tag
 	private static final String TAG = MainActivity.class.getSimpleName();
@@ -69,8 +70,8 @@ public class MainActivity extends Activity
 
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
-@Nullable
-@Override
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
@@ -87,6 +88,7 @@ public class MainActivity extends Activity
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
+
 
 		listView = (ListView) findViewById(R.id.list);
 		customAdapter = new CustomListAdapter(this, movieList);
@@ -168,24 +170,22 @@ public class MainActivity extends Activity
 
 		// adding nav drawer items to array
 		// Home
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1), true, ""));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
 		// Find People
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
-
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
 		// Photos
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
 		// Communities, Will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true, "22"));
 		// Pages
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
 		// What's hot, We  will add a counter here
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
 		//User Profile
-		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(7, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
 
 
-		// Recycle the typed array.
+		// Recycle the typed array
 		navMenuIcons.recycle();
 
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
@@ -219,9 +219,6 @@ public class MainActivity extends Activity
 				invalidateOptionsMenu();
 			}
 		};
-
-
-
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 		if (savedInstanceState == null)
@@ -238,14 +235,11 @@ public class MainActivity extends Activity
 	{
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
+								long id) {
 			// display view for selected nav drawer item
-
-				displayView(position);
-			}
-
+			displayView(position);
 		}
-
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
@@ -270,10 +264,10 @@ public class MainActivity extends Activity
 		// Handle action bar actions click
 		switch (item.getItemId())
 		{
-		case R.id.action_settings:
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
+			case R.id.action_settings:
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 	}
 
@@ -289,50 +283,38 @@ public class MainActivity extends Activity
 		return super.onPrepareOptionsMenu(menu);
 	}
 
-
 	/**
 	 * Diplaying fragment view for selected nav drawer list item
 	 * */
-
 	private void displayView(int position)
 	{
 		// update the main content by replacing fragments
-
 		Fragment fragment = null;
-
 		switch (position) {
 			case 0:
-			//	fragment = new UserPostActivity();
-				break;
-			case 1:
 				fragment = new HomeFragment();
 				break;
-
-			case 2:
+			case 1:
 				fragment = new UserProfileFragment();
 				break;
-
-			case 3:
+			case 2:
 				fragment = new FindPeopleFragment();
 				break;
-
-			case 4:
+			case 3:
 				fragment = new PhotosFragment();
 				break;
-
-			case 5:
+			case 4:
 				fragment = new CommunityFragment();
 				break;
-
-			case 6:
+			case 5:
 				fragment = new PagesFragment();
 				break;
-
-			case 7:
+			case 6:
 				fragment = new WhatsHotFragment();
 				break;
-		default:
-			break;
+
+			default:
+				break;
 		}
 
 		if (fragment != null)
@@ -352,7 +334,6 @@ public class MainActivity extends Activity
 			Log.e("MainActivity", "Error in creating fragment");
 		}
 	}
-
 
 	@Override
 	public void setTitle(CharSequence title)
@@ -394,7 +375,4 @@ public class MainActivity extends Activity
 			pDialog = null;
 		}
 	}
-
-
-
 }
