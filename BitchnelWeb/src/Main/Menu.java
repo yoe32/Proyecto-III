@@ -1,7 +1,7 @@
 package Main;
 
-public class Menu {
-
+public class Menu 
+{
 	private String product;
 	private String descripcion;
 	private byte[] img;
