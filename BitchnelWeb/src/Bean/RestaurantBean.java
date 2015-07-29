@@ -1,8 +1,11 @@
-package Main;
+package Bean;
 
-public class Restaurant 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
+public class RestaurantBean 
 {
-	private int id;
 	private String name;
 	private String email;
 	private String password;
@@ -15,120 +18,147 @@ public class Restaurant
 	private String schedule;
 	private byte[] img;
 	
-	public Restaurant()
+	private final HttpServletRequest httpServletRequest;
+	private final FacesContext faceContext;
+	private FacesMessage facesMessage;
+	
+	public RestaurantBean() 
+	{
+		faceContext = FacesContext.getCurrentInstance();
+		httpServletRequest = (HttpServletRequest)faceContext.getExternalContext().getRequest();
+		if(httpServletRequest.getSession().getAttribute("sessionUsuario") != null)
+		{
+			email = httpServletRequest.getSession().getAttribute("sessionUsuario").toString();
+		}
+	}
+
+	public String cerrarSession()
+	{
+		httpServletRequest.getSession().removeAttribute("sessionUsuario");
+		facesMessage=new FacesMessage(FacesMessage.SEVERITY_INFO, "Session cerrada correctamente", null);
+		faceContext.addMessage(null, facesMessage);
+		return "index";
+	}
+	
+	
+	public void updateName()
 	{
 		
 	}
-
-	public Restaurant(int id, String name, String email, String password, String description, String province, String location, int phonei, int phoneii, int phoneiii, String schedule, byte[] img) 
+	
+	public void updateEmail()
 	{
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.description = description;
-		this.province = province;
-		this.location = location;
-		this.phonei = phonei;
-		this.phoneii = phoneii;
-		this.phoneiii = phoneiii;
-		this.schedule = schedule;
-		this.img = img;
+		
 	}
-
-	public int getId() {
-		return id;
+	
+	public void updatePassword()
+	{
+		
 	}
-
-	public void setId(int id) {
-		this.id = id;
+	
+	public void updateDescription()
+	{
+		
 	}
-
+	
+	public void updateProvince()
+	{
+		
+	}
+	
+	public void updateLocation()
+	{
+		
+	}
+	
+	public void updatePhonei()
+	{
+		
+	}
+	
+	public void updatePhoneii()
+	{
+		
+	}
+	
+	public void updatePhoneiii()
+	{
+		
+	}
+	
+	public void updateSchedule()
+	{
+		
+	}
+	
+	public void updateImg()
+	{
+		
+	}
+	
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	public String getDescription() {
 		return description;
 	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 	public String getProvince() {
 		return province;
 	}
-
 	public void setProvince(String province) {
 		this.province = province;
 	}
-
 	public String getLocation() {
 		return location;
 	}
-
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
 	public int getPhonei() {
 		return phonei;
 	}
-
 	public void setPhonei(int phonei) {
 		this.phonei = phonei;
 	}
-
 	public int getPhoneii() {
 		return phoneii;
 	}
-
 	public void setPhoneii(int phoneii) {
 		this.phoneii = phoneii;
 	}
-
 	public int getPhoneiii() {
 		return phoneiii;
 	}
-
 	public void setPhoneiii(int phoneiii) {
 		this.phoneiii = phoneiii;
 	}
-
 	public String getSchedule() {
 		return schedule;
 	}
-
 	public void setSchedule(String schedule) {
 		this.schedule = schedule;
 	}
-
 	public byte[] getImg() {
 		return img;
 	}
-
 	public void setImg(byte[] img) {
 		this.img = img;
 	}

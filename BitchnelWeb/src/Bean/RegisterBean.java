@@ -1,6 +1,6 @@
 package Bean;
 
-import DAO.RestaurantService;
+import DAO.RegisterService;
 import Main.Restaurant;
 
 public class RegisterBean 
@@ -9,19 +9,23 @@ public class RegisterBean
 	private String name;
 	private String email;
 	private String password;
-	private String description;
-	private String location;
+	private String description = "empty";
+	private String province;
+	private String location = "empty";
 	private int phonei;
-	private int phoneii;
-	private int phoneiii;
-	private byte[] img;
+	private int phoneii  = 0;
+	private int phoneiii = 0;
+	private String schedule = "empty";
+	private byte[] img = null;
+
 	
-	RestaurantService rs = new RestaurantService();
+	RegisterService rs = new RegisterService();
 	Restaurant res = new Restaurant();
 	
+
 	public String register()
 	{
-		rs.registerRestaurant(new Restaurant(1, this.name, this.email, this.password, this.description, this.location, this.phonei, this.phoneii, this.phoneiii, null));
+		rs.registerRestaurant(new Restaurant(id, name, email, password, description, province, location, phonei, phoneii, phoneiii, schedule, img));
 		return "index";
 	}
 
@@ -65,6 +69,14 @@ public class RegisterBean
 		this.description = description;
 	}
 
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
 	public String getLocation() {
 		return location;
 	}
@@ -95,6 +107,14 @@ public class RegisterBean
 
 	public void setPhoneiii(int phoneiii) {
 		this.phoneiii = phoneiii;
+	}
+
+	public String getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(String schedule) {
+		this.schedule = schedule;
 	}
 
 	public byte[] getImg() {

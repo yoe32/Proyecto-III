@@ -1,24 +1,39 @@
 package Bean;
 
-import DAO.RestaurantService;
+import DAO.LoginService;
+import javax.faces.context.FacesContext;
+import javax.faces.application.FacesMessage;
+import javax.servlet.http.HttpServletRequest;
 
 public class LoginBean 
 {
 	private String email;
 	private String password;
+	private final HttpServletRequest httpServletRequest;
+    private final FacesContext faceContext;
+    private FacesMessage facesMessage;
 	
-	RestaurantService rs = new RestaurantService();
+	LoginService ls = new LoginService();
+	
+	public LoginBean() 
+    {
+        faceContext=FacesContext.getCurrentInstance();
+        httpServletRequest=(HttpServletRequest)faceContext.getExternalContext().getRequest();
+    }
 	
 	public String login(String email, String password)
 	{
-		if(rs.login(email, password) == true)
+		if(ls.login(email, password) == true)
 		{
+			httpServletRequest.getSession().setAttribute("sessionUsuario", email);
+            facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Acceso Correcto", null);
+            faceContext.addMessage(null, facesMessage);
 			return "restaurant";
 		}
 		else
 		{
-			System.out.println(email);
-			System.out.println(password);
+			facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecto", null);
+	        faceContext.addMessage(null, facesMessage);
 			return "index";
 		}
 	}
