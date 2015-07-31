@@ -19,22 +19,24 @@ public class LoginBean
 			// get Http Session and store username
 			HttpSession session = Util.getSession();
 			session.setAttribute("username", email);
-			return "restaurant";
+			System.out.println(Util.getUserName());
+			System.out.println(Util.getUserId());
+			return "home";
 		}
 		else
 		{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Invalid Login!", "Please Try Again!"));
 			// invalidate session, and redirect to other pages
 			//message = "Invalid Login. Please Try Again!";
-			return "index";
+			return "login";
 		}
 	}
-	
+
 	public String logout()
 	{
 		HttpSession session = Util.getSession();
-	    session.invalidate();
-		return "index";
+		session.invalidate();
+		return "login";
 	}
 
 	public String getEmail() {

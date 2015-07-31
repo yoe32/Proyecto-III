@@ -26,7 +26,7 @@ public class RegisterBean
 	public String register()
 	{
 		rs.registerRestaurant(new Restaurant(id, name, email, password, description, province, location, phonei, phoneii, phoneiii, schedule, img));
-		return "index";
+		return "login";
 	}
 
 	public int getId() {

@@ -4,17 +4,50 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
-<ui:composition template="">
-	<ui:define name="header">
-	    Add your header here or delete to use the default
-	</ui:define>
-	<ui:define name="content">
-	    Add your content here or delete to use the default
-	</ui:define>
-	<ui:define name="footer">
-	    Add your footer here or delete to use the default
-	</ui:define>
-</ui:composition>
+<h:head>
+	<title>Login</title>
+
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputScript library="js" name="jquery-2.1.4.js" />
+</h:head>
+
+
+<!-- BEGIN BODY -->
+<h:body class="login">
+
+	<div class="container">
+
+		<form id="signup">
+
+			<div class="header">
+
+				<h3>Login</h3>
+			</div>
+
+			<div class="sep"></div>
+			<div class="inputs">
+				<h:form>
+					<h:inputText type="email" placeholder="e-mail"
+						value="#{loginBean.email}" required="true" />
+
+					<h:inputSecret type="password" placeholder="password"
+						value="#{loginBean.password}" required="true" />
+
+					<h:commandButton id="submit" value="Login :D"
+						action="#{loginBean.login(loginBean.email, loginBean.password)}">
+					</h:commandButton>
+					<h:link value="Register" outcome="register" />
+					<h:messages style="color:red;margin:8px;" />
+				</h:form>
+			</div>
+		</form>
+	</div>
+
+</h:body>
+<!-- END BODY -->
 </html>
