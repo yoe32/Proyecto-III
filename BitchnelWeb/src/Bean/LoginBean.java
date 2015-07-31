@@ -1,43 +1,42 @@
 package Bean;
 
-import DAO.LoginService;
-import javax.faces.context.FacesContext;
 import javax.faces.application.FacesMessage;
-import javax.servlet.http.HttpServletRequest;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+import DAO.LoginService;
 
-public class LoginBean 
+public class LoginBean
 {
 	private String email;
 	private String password;
-	private final HttpServletRequest httpServletRequest;
-    private final FacesContext faceContext;
-    private FacesMessage facesMessage;
-	
+
 	LoginService ls = new LoginService();
-	
-	public LoginBean() 
-    {
-        faceContext=FacesContext.getCurrentInstance();
-        httpServletRequest=(HttpServletRequest)faceContext.getExternalContext().getRequest();
-    }
-	
+
 	public String login(String email, String password)
 	{
 		if(ls.login(email, password) == true)
 		{
-			httpServletRequest.getSession().setAttribute("sessionUsuario", email);
-            facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Acceso Correcto", null);
-            faceContext.addMessage(null, facesMessage);
+			// get Http Session and store username
+			HttpSession session = Util.getSession();
+			session.setAttribute("username", email);
 			return "restaurant";
 		}
 		else
 		{
-			facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecto", null);
-	        faceContext.addMessage(null, facesMessage);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Invalid Login!", "Please Try Again!"));
+			// invalidate session, and redirect to other pages
+			//message = "Invalid Login. Please Try Again!";
 			return "index";
 		}
 	}
 	
+	public String logout()
+	{
+		HttpSession session = Util.getSession();
+	    session.invalidate();
+		return "index";
+	}
+
 	public String getEmail() {
 		return email;
 	}

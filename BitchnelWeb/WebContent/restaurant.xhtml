@@ -35,9 +35,12 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-left">
-				<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-				<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-				<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+				<li role="presentation" class="active"><a href="#home"
+					aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+				<li role="presentation"><a href="#profile"
+					aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+				<li role="presentation"><a href="#settings"
+					aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
 			</ul>
 			<form class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search..." />
@@ -50,10 +53,14 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li><img src="resources/img/Dejiitaru.png" class="img-responsive" alt="" /></li>
-					<li role="presentation"><a href="#menu" aria-controls="home" role="tab" data-toggle="tab">Menu</a></li>
-					<li role="presentation"><a href="#event" aria-controls="home" role="tab" data-toggle="tab">Event</a></li>
-					<li role="presentation"><a href="#gallery" aria-controls="home" role="tab" data-toggle="tab">Gallery</a></li>
+					<li><img src="resources/img/Dejiitaru.png"
+						class="img-responsive" alt="" /></li>
+					<li role="presentation"><a href="#menu" aria-controls="home"
+						role="tab" data-toggle="tab">Menu</a></li>
+					<li role="presentation"><a href="#event" aria-controls="home"
+						role="tab" data-toggle="tab">Event</a></li>
+					<li role="presentation"><a href="#gallery"
+						aria-controls="home" role="tab" data-toggle="tab">Gallery</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -63,24 +70,32 @@
 					<!-- Tab panes -->
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane active" id="home">
-						
-						<h:form>
-						<p:panelGrid columns="2">
-						<h:outputText value="QR" />
-    					<p:barcode value="http://localhost:8080/BitchnelWeb/faces/restaurant.xhtml" type="qr"/>
-						</p:panelGrid>
-						</h:form>
-						
-						<h:messages infoStyle="color: blue;list-style:none;"/>
-						<h:outputLabel value="Ingreso con el usuario: "/>
-						<h:outputText value="#{restaurantBean.email}"/>
-						<h:form>
-						    <h:commandButton value="Logout" action="#{restaurantBean.cerrarSession()}"/>
-						</h:form>
-						
+
+							<h:form>
+								<p:panelGrid columns="2">
+									<h:outputText value="QR" />
+									<p:barcode
+										value="http://localhost:8080/BitchnelWeb/faces/restaurant.xhtml"
+										type="qr" />
+								</p:panelGrid>
+							</h:form>
+
+							<h:messages infoStyle="color: blue;list-style:none;" />
+							<h:outputLabel value="Ingreso con el usuario: " />
+							<h:outputText value="#{restaurantBean.email}" />
+							<h:form>
+								<h:commandButton value="Logout" action="#{loginBean.logout()}" />
+							</h:form>
+
+							<h:form>
+								<p>Welcome, #{loginBean.email}</p>
+								<p:commandButton action="#{loginBean.logout()}" value="Logout"
+									ajax="false"></p:commandButton>
+							</h:form>
+
 						</div>
-						
-						
+
+
 						<div role="tabpanel" class="tab-pane" id="profile">proile</div>
 						<div role="tabpanel" class="tab-pane" id="settings">settings</div>
 						<div role="tabpanel" class="tab-pane" id="menu">menu</div>

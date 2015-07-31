@@ -12,7 +12,7 @@ public class Tester {
 
 		Restaurant res = new Restaurant();
 
-		RestaurantService rs = new RestaurantService();
+		
 
 		Scanner scan = new Scanner(System.in);	
 		res.setId(0);
@@ -35,7 +35,6 @@ public class Tester {
 		System.out.println("profile image");
 		res.setImg(null);
 
-		rs.registerRestaurant(res);
 		scan.close();
 	}
 }

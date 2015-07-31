@@ -1,10 +1,6 @@
 package Bean;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-
-public class RestaurantBean 
+public class RestaurantBean
 {
 	private String name;
 	private String email;
@@ -17,29 +13,6 @@ public class RestaurantBean
 	private int phoneiii;
 	private String schedule;
 	private byte[] img;
-	
-	private final HttpServletRequest httpServletRequest;
-	private final FacesContext faceContext;
-	private FacesMessage facesMessage;
-	
-	public RestaurantBean() 
-	{
-		faceContext = FacesContext.getCurrentInstance();
-		httpServletRequest = (HttpServletRequest)faceContext.getExternalContext().getRequest();
-		if(httpServletRequest.getSession().getAttribute("sessionUsuario") != null)
-		{
-			email = httpServletRequest.getSession().getAttribute("sessionUsuario").toString();
-		}
-	}
-
-	public String cerrarSession()
-	{
-		httpServletRequest.getSession().removeAttribute("sessionUsuario");
-		facesMessage=new FacesMessage(FacesMessage.SEVERITY_INFO, "Session cerrada correctamente", null);
-		faceContext.addMessage(null, facesMessage);
-		return "index";
-	}
-	
 	
 	public void updateName()
 	{

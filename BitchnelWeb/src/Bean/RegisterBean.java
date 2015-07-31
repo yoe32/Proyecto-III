@@ -1,9 +1,10 @@
 package Bean;
 
+import Bean.LoginBean;
 import DAO.RegisterService;
 import Main.Restaurant;
 
-public class RegisterBean 
+public class RegisterBean
 {
 	private int id;
 	private String name;
@@ -18,10 +19,9 @@ public class RegisterBean
 	private String schedule = "empty";
 	private byte[] img = null;
 
-	
 	RegisterService rs = new RegisterService();
 	Restaurant res = new Restaurant();
-	
+	LoginBean lb = new LoginBean();
 
 	public String register()
 	{

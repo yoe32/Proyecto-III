@@ -17,18 +17,18 @@ public class LoginService extends Service
 			st = getConexion().createStatement();
 			ResultSet rs = st.executeQuery("SELECT restaurant_profile_id, restaurant_name, restaurant_email, restaurant_password FROM restaurant_profile");
 
-			while (rs.next()) 
+			while (rs.next() && !match) 
 			{
 				if (email.equals(rs.getString(3)) && (password.equals(rs.getString(4)))) 
 				{
 					System.out.println("Welcome " + rs.getString(2));
 					match = true;
 				}
-				else
-				{
-					System.out.println("Usuario o contrasena incorrectos");
-					match = false;
-				}
+			}
+			
+			if(match == false)
+			{
+				System.out.println("Usuario o contrasena incorrectos");
 			}
 			
 			if (rs != null) 
