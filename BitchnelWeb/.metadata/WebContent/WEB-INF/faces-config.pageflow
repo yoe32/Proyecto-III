@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14383603534490" configfile="/BitchnelWeb/WebContent/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14383603534490" configfile="/BitchnelWeb/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="338" y="370" id="pf14383998271660" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" outlinks="pf14383998271671 pf14383998271672" inlinks="pf14383998271673 pf14383998271674" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="home.xhtml" x="122" y="178" id="pf14383998271675" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14383998271673" inlinks="pf14383998271671" path="/home.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="register.xhtml" x="122" y="562" id="pf14383998271676" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf14383998271674" inlinks="pf14383998271672" path="/register.xhtml"/>
+  <links id="pf14383998271671" target="pf14383998271675" source="pf14383998271660" outcome="home" redirect="true"/>
+  <links id="pf14383998271673" target="pf14383998271660" source="pf14383998271675" outcome="login" redirect="true"/>
+  <links id="pf14383998271672" target="pf14383998271676" source="pf14383998271660" outcome="register" redirect="true"/>
+  <links id="pf14383998271674" target="pf14383998271660" source="pf14383998271676" outcome="login" redirect="true"/>
+</pageflow:Pageflow>

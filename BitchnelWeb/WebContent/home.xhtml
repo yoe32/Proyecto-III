@@ -7,7 +7,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:pe="http://primefaces.org/ui/extensions">
+	xmlns:m="http://code.google.com/p/gmaps4jsf/">
 
 <h:head>
 	<title>#{loginBean.email}</title>
@@ -19,9 +19,18 @@
 	<h:outputScript library="js" name="bootstrap.js" />
 	<h:outputScript library="js" name="holder.min.js" />
 	<h:outputScript library="js" name="jquery.qrcode-0.12.0.min.js" />
+	
+	<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?sensor=true">
+    </script>
 </h:head>
 
 <h:body>
+
+<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?sensor=true">
+    </script>
+
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -79,6 +88,19 @@
 										value="http://localhost:8080/BitchnelWeb/faces/restaurant.xhtml"
 										type="qr" />
 								</p:panelGrid>
+								
+								
+								<m:map width="500px" height="500px" latitude="30.01" longitude="31.14" />
+								
+								 <m:map address="#{addressBean.address}">
+         <m:marker/>
+         <m:htmlInformationWindow htmlText="#{addressBean.address}"/>
+  </m:map>
+  
+  <m:map width="90%" height="90%" latitude="24" longitude="15">                       
+        <m:eventListener eventName="moveend" jsFunction="mapMoveEndHandler"/>           
+    </m:map>
+								
 							</h:form>
 
 							<h:messages infoStyle="color: blue;list-style:none;" />
