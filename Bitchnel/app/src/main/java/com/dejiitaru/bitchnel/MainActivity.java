@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -17,8 +18,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,7 +44,8 @@ import com.dejiitaru.bitchnel.adapter.NavDrawerListAdapter;
 import com.dejiitaru.bitchnel.app.AppController;
 import com.dejiitaru.bitchnel.model.Movie;
 import com.dejiitaru.bitchnel.model.NavDrawerItem;
-import com.dejiitaru.bitchnel.restaurant.RestaurantProfileActivity;
+import com.dejiitaru.bitchnel.restaurant.RestaurantMainActivity;
+import com.dejiitaru.bitchnel.restaurant.RestaurantProfileFragment;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.login.widget.LoginButton;
@@ -52,6 +55,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
@@ -63,7 +67,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity  extends Activity implements View.OnClickListener,
+public class MainActivity  extends FragmentActivity implements View.OnClickListener,
 		GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener
 {
 	private static final int RC_SIGN_IN = 0;
@@ -136,8 +140,10 @@ public class MainActivity  extends Activity implements View.OnClickListener,
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		setContentView(R.layout.activity_main);
 		super.onCreate(savedInstanceState);
+		FacebookSdk.sdkInitialize(getApplicationContext());
+		setContentView(R.layout.activity_main);
+
 
 		FacebookSdk.sdkInitialize(getApplicationContext());
 
@@ -167,7 +173,7 @@ public class MainActivity  extends Activity implements View.OnClickListener,
 
 		btnSignIn = (SignInButton) findViewById(R.id.google_intro_login);
 
-		plantillaMain = (RelativeLayout)findViewById(R.id.drawer_layout);
+		plantillaMain = (RelativeLayout)findViewById(R.id.plantilla_main);
 
 		//***********SET ON CLICK LISTENER GOOGLE **************
 
@@ -176,18 +182,18 @@ public class MainActivity  extends Activity implements View.OnClickListener,
 
 		// Initializing google plus api client
 
-				mGoogleApiClient = new GoogleApiClient.Builder(this)
-						.addApi(Plus.API)
-						.addConnectionCallbacks(this)
-						.addOnConnectionFailedListener(this)
-						.addScope(Plus.SCOPE_PLUS_LOGIN).build();
+		mGoogleApiClient = new GoogleApiClient.Builder(this)
+				.addApi(Plus.API)
+				.addConnectionCallbacks(this)
+				.addOnConnectionFailedListener(this)
+				.addScope(Plus.SCOPE_PLUS_LOGIN).build();
 
 
 
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				final Intent intent = new Intent(MainActivity.this, RestaurantProfileActivity.class);
+				final Intent intent = new Intent(MainActivity.this, RestaurantMainActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -269,9 +275,6 @@ public class MainActivity  extends Activity implements View.OnClickListener,
 		// What's hot, We  will add a counter here
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
 		//User Profile
-// 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(7, -1)));
-		//User Profile
-
 
 
 		// Recycle the typed array.
@@ -596,13 +599,13 @@ public class MainActivity  extends Activity implements View.OnClickListener,
 		switch (position) {
 			case 0:
 
-			break;
+				break;
 			case 1:
 				fragment = new HomeFragment();
 
 				break;
 			case 2:
-				fragment = new UserProfileFragment();
+				fragment = new WhatsHotFragment();
 				break;
 
 			case 3:
@@ -620,9 +623,7 @@ public class MainActivity  extends Activity implements View.OnClickListener,
 			case 6:
 				fragment = new PagesFragment();
 				break;
-			case 7:
-				fragment = new WhatsHotFragment();
-						break;
+
 			default:
 				break;
 		}

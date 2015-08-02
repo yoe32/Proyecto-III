@@ -1,14 +1,11 @@
-package com.dejiitaru.bitchnel;
+package com.dejiitaru.bitchnel.restaurant;
 
-import com.dejiitaru.bitchnel.adapter.CustomListAdapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -19,10 +16,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.dejiitaru.bitchnel.R;
+import com.dejiitaru.bitchnel.adapter.CustomListAdapter;
 import com.dejiitaru.bitchnel.app.AppController;
 import com.dejiitaru.bitchnel.model.Movie;
-import com.dejiitaru.bitchnel.restaurant.RestaurantMainActivity;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,34 +28,29 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VolleyMainActivity  extends Activity{
+/**
+ * Created by Usuario on 8/1/2015.
+ */
+public class RestaurantChartListActivity extends Activity {
+
     // Log tag
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = RestaurantChartListActivity.class.getSimpleName();
 
     // Movies json url
     private static final String url = "http://api.androidhive.info/json/movies.json";
     private ProgressDialog pDialog;
-    private List<Movie> movieList = new ArrayList<>();
+    private List<Movie> movieList = new ArrayList<Movie>();
     private ListView listView;
-    private CustomListAdapter customAdapter;
+    private CustomListAdapter adapter;
 
-    @Nullable
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.volley_main_activity);
+        setContentView(R.layout.activity_chart_list);
 
         listView = (ListView) findViewById(R.id.list);
-        customAdapter = new CustomListAdapter(this, movieList);
-        listView.setAdapter(customAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Intent intent = new Intent(VolleyMainActivity.this, RestaurantMainActivity.class);
-                startActivity(intent);
-            }
-        });
+        adapter = new CustomListAdapter(this, movieList);
+        listView.setAdapter(adapter);
 
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
@@ -108,7 +100,7 @@ public class VolleyMainActivity  extends Activity{
 
                         // notifying list adapter about data changes
                         // so that it renders the list view with updated data
-                        customAdapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -123,7 +115,6 @@ public class VolleyMainActivity  extends Activity{
         AppController.getInstance().addToRequestQueue(movieReq);
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -137,10 +128,10 @@ public class VolleyMainActivity  extends Activity{
         }
     }
 
-    @Override
+ /*   @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_restaurant_profile, menu);
         return true;
-    }
+    }*/
 }

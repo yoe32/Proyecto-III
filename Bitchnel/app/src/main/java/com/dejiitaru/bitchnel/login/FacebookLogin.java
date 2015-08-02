@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.dejiitaru.bitchnel.MainActivity;
 import com.dejiitaru.bitchnel.R;
 import com.facebook.AccessToken;
@@ -28,32 +31,28 @@ import org.json.JSONObject;
 
 public class FacebookLogin extends Activity
 {
+
+
+
     CallbackManager callbackManager;
     ShareDialog shareDialog;
     LoginButton login;
     ProfilePictureView profile;
     Dialog details_dialog;
     TextView details_txt;
-    Button share,details;
 
-
-
+    @Nullable
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
-        setContentView(R.layout.activity_listview_header_facebook);
+        setContentView(R.layout.activity_main);
 
         callbackManager = CallbackManager.Factory.create();
         login = (LoginButton)findViewById(R.id.failbook_intro_login);
-        share = (Button)findViewById(R.id.share);
-        details = (Button)findViewById(R.id.details);
         profile = (ProfilePictureView)findViewById(R.id.picture);
         shareDialog = new ShareDialog(this);
-
-        share.setVisibility(View.INVISIBLE);
-        details.setVisibility(View.INVISIBLE);
 
         login.setReadPermissions("public_profile email");
 
@@ -62,38 +61,15 @@ public class FacebookLogin extends Activity
         details_dialog.setTitle("Details");
         details_txt = (TextView)details_dialog.findViewById(R.id.details);
 
-        details.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                details_dialog.show();
-            }
-        });
-
-        if(AccessToken.getCurrentAccessToken() != null){
-            RequestData();
-            share.setVisibility(View.INVISIBLE);
-            details.setVisibility(View.INVISIBLE);
-        }
 
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (AccessToken.getCurrentAccessToken() != null) {
-                    share.setVisibility(View.INVISIBLE);
-                    details.setVisibility(View.INVISIBLE);
+
                     profile.setProfileId(null);
-
                 }
-            }
-        });
-
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ShareLinkContent content = new ShareLinkContent.Builder().build();
-                shareDialog.show(content);
-
             }
         });
 
@@ -102,12 +78,14 @@ public class FacebookLogin extends Activity
             public void onSuccess(LoginResult loginResult) {
 
                 if (AccessToken.getCurrentAccessToken() != null) {
+                    login.setVisibility(View.GONE);
+                    profile.setVisibility(View.VISIBLE);
+                    details_txt.setVisibility(View.VISIBLE);
                     RequestData();
-                    Intent intent = new Intent(FacebookLogin.this,MainActivity.class);
-                    startActivity(intent);
 
-                    //    details_txt.setVisibility(View.VISIBLE);
                 }
+//                Intent intent = new Intent(FacebookLogin.this,MainActivity.class);
+//                startActivity(intent);
             }
 
             @Override
@@ -117,7 +95,6 @@ public class FacebookLogin extends Activity
 
             @Override
             public void onError(FacebookException exception) {
-
             }
         });
 
@@ -132,8 +109,8 @@ public class FacebookLogin extends Activity
                 try {
                     if (json != null) {
                         String text = "<b>Name :</b> " + json.getString("name") + "<br><br><b>Email :</b> "+json.getString("email")+"<br><br><b>Profile link :</b> "+json.getString("link");
-                   //     details_txt.setText(Html.fromHtml(text));
-                    //    profile.setProfileId(json.getString("id"));
+                        details_txt.setText(Html.fromHtml(text));
+                        profile.setProfileId(json.getString("id"));
                     }
 
                 } catch (JSONException e) {

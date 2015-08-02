@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.dejiitaru.bitchnel.model.NavDrawerItem;
 
 import java.util.ArrayList;
@@ -21,9 +22,9 @@ public class NavDrawerListAdapter extends BaseAdapter
 	private static final int TYPE_ITEM = 1;
 	private Context context;
 	private ArrayList<NavDrawerItem> navDrawerItems;
-	
+
 	public NavDrawerListAdapter(Context context, ArrayList<NavDrawerItem> navDrawerItems)
-    {
+	{
 		this.context = context;
 		this.navDrawerItems = navDrawerItems;
 	}
@@ -52,13 +53,13 @@ public class NavDrawerListAdapter extends BaseAdapter
 
 		if (position == TYPE_HEADER) {
 			LayoutInflater mInflater = (LayoutInflater)
-			context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+					context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 			convertView = mInflater.inflate(R.layout.activity_listview_header_google, null);
 
 		} else {
 			if (convertView == null) {
 				LayoutInflater mInflater = (LayoutInflater)
-				context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+						context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 				convertView = mInflater.inflate(R.layout.drawer_list_item, null);
 			}
 
@@ -66,8 +67,8 @@ public class NavDrawerListAdapter extends BaseAdapter
 			TextView txtTitle = (TextView) convertView.findViewById(R.id.title);
 			TextView txtCount = (TextView) convertView.findViewById(R.id.counter);
 
-				imgIcon.setImageResource(navDrawerItems.get(position).getIcon());
-				txtTitle.setText(navDrawerItems.get(position).getTitle());
+			imgIcon.setImageResource(navDrawerItems.get(position).getIcon());
+			txtTitle.setText(navDrawerItems.get(position).getTitle());
 
 
 			// displaying count
@@ -80,6 +81,6 @@ public class NavDrawerListAdapter extends BaseAdapter
 				txtCount.setVisibility(View.GONE);
 			}
 		}
-			return convertView;
-		}
+		return convertView;
 	}
+}

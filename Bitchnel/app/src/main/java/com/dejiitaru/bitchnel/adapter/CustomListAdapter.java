@@ -18,9 +18,6 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
 public class CustomListAdapter  extends BaseAdapter {
-
-    private static final int TYPE_HEADER = 0;
-    private static final int TYPE_ITEM = 1;
         private Activity activity;
         private LayoutInflater inflater;
         private List<Movie> movieItems;
@@ -52,6 +49,8 @@ public class CustomListAdapter  extends BaseAdapter {
             if (inflater == null)
                 inflater = (LayoutInflater) activity
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
             if (convertView == null)
                 convertView = inflater.inflate(R.layout.volley_list_row, null);
 

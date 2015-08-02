@@ -1,94 +1,100 @@
 package com.dejiitaru.bitchnel.restaurant;
 
 import com.dejiitaru.bitchnel.R;
-
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class RestaurantProfileFragment extends Fragment {
-	/*
-	MapView mMapView;
-	private GoogleMap googleMap;
+import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.InflateException;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ScrollView;
+import android.widget.Toast;
+
+
+public class RestaurantProfileFragment extends Fragment
+{
+
+
+	GoogleMap googleMap;
+	private static View view;
+
+	public RestaurantProfileFragment()
+	{
+
+	}
+
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
-		// inflate and return the layout
-		View v = inflater.inflate(R.layout.fragment_restaurant_profile, container,
-				false);
-		mMapView = (MapView) v.findViewById(R.id.mapView);
-		mMapView.onCreate(savedInstanceState);
-
-		mMapView.onResume();// needed to get the map to display immediately
-
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+	{
+		if (view != null) {
+			ViewGroup parent = (ViewGroup) view.getParent();
+			if (parent != null)
+				parent.removeView(view);
+		}
 		try {
-			MapsInitializer.initialize(getActivity().getApplicationContext());
-		} catch (Exception e) {
-			e.printStackTrace();
+			view = inflater.inflate(R.layout.fragment_restaurant_profile, container, false);
+		} catch (InflateException e) {
+			//GOOGLE MAPS
+			createMapView();
+			addMarker();
 		}
 
-		googleMap = mMapView.getMap();
-		// latitude and longitude
-		double latitude = 17.385044;
-		double longitude = 78.486671;
+		return view;
 
-		// create marker
-		MarkerOptions marker = new MarkerOptions().position(
-				new LatLng(latitude, longitude)).title("Hello Maps");
 
-		// Changing marker icon
-		marker.icon(BitmapDescriptorFactory
-				.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
 
-		// adding marker
-		googleMap.addMarker(marker);
-		CameraPosition cameraPosition = new CameraPosition.Builder()
-				.target(new LatLng(17.385044, 78.486671)).zoom(12).build();
-		googleMap.animateCamera(CameraUpdateFactory
-				.newCameraPosition(cameraPosition));
 
-		// Perform any camera updates here
-		return v;
+
 	}
+	private void createMapView(){
+		/**
+		 * Catch the null pointer exception that
+		 * may be thrown when initialising the map
+		 */
+		try {
+			if(null == googleMap) {
+				googleMap = ((SupportMapFragment) getFragmentManager().findFragmentById(
+						R.id.mapView)).getMap();
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		mMapView.onResume();
-	}
+				/**
+				 * If the map is still null after attempted initialisation,
+				 * show an error to the user
+				 */
+				if(null == googleMap) {
+					Toast.makeText(getActivity(),
+							"Error creating map", Toast.LENGTH_SHORT).show();
+				}
+			}
+		} catch (NullPointerException exception) {
+			Log.e("mapApp", exception.toString());
+		}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		mMapView.onPause();
 	}
+	//IF MAP IS TOUCH
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		mMapView.onDestroy();
-	}
 
-	@Override
-	public void onLowMemory() {
-		super.onLowMemory();
-		mMapView.onLowMemory();
+	/**
+	 * Adds a marker to the map
+	 */
+	private void addMarker(){
+
+		/** Make sure that the map has been initialised **/
+		if(null != googleMap){
+			googleMap.addMarker(new MarkerOptions()
+							.position(new LatLng(0, 0))
+							.title("Marker")
+							.draggable(true)
+			);
+		}
 	}
-*/
 }
+
