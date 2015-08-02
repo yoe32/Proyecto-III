@@ -11,6 +11,7 @@ import com.dejiitaru.bitchnel.restaurant.RestaurantEventFragment;
 import com.dejiitaru.bitchnel.restaurant.RestaurantGalleryFragment;
 import com.dejiitaru.bitchnel.restaurant.RestaurantMenuFragment;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -29,9 +30,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter
 		{
 		case 0:
 			// Top Rated fragment activity
-
-			return new RestaurantProfileFragment();
-
+		return  new RestaurantProfileFragment();
 		case 1:
 			// Games fragment activity
 			return new RestaurantGalleryFragment();

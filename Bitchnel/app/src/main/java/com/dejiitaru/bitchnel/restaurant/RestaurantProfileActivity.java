@@ -3,7 +3,6 @@ package com.dejiitaru.bitchnel.restaurant;
 import com.dejiitaru.bitchnel.R;
 import com.dejiitaru.bitchnel.adapter.TabsPagerAdapter;
 import android.app.ActionBar;
-import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -15,7 +14,7 @@ public class RestaurantProfileActivity extends FragmentActivity implements Actio
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
     // Tab titles
-    //private String[] tabs = { "Top Rated", "Games", "Movies" };
+    private String[] tabs = { "Top Rated", "Games", "Movies" };
 
     int[] icons = new int[]
             {

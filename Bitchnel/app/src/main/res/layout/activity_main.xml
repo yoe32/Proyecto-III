@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="3dp"
+    android:background="@drawable/orange_blue_gradient"
+    tools:context=".MainActivity">
+
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/google_intro_login"
+        android:layout_width="260dp"
+        android:layout_height="37dp"
+        android:layout_gravity="center"/>
+
+  <!--  <com.facebook.login.widget.LoginButton
+        android:id="@+id/failbook_intro_login"
+        android:layout_marginTop="90dp"
+        android:layout_width="260dp"
+        android:layout_height="37dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:text="@string/btn_intro_facebook"/>-->
+
+<android.support.v4.widget.DrawerLayout
     android:id="@+id/drawer_layout"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
+        android:id="@+id/main_plantilla"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".VolleyMainActivity" >
+        tools:context=".VolleyMainActivity"
+        android:visibility="gone">
 
 
         <ListView
@@ -43,3 +70,4 @@
 </android.support.v4.widget.DrawerLayout>
 
 
+</LinearLayout>

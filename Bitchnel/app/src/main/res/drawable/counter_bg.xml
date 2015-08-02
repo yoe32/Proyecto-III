@@ -3,8 +3,8 @@
     android:shape="rectangle" >
     <!-- If you want to add some padding -->
     <padding
-        android:bottom="150dp"
-        android:right="35dp"
+        android:bottom="120dp"
+        android:right="60dp"
         android:left="3dp" >
     </padding>
 

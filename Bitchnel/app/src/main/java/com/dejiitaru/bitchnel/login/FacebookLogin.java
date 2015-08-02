@@ -132,8 +132,8 @@ public class FacebookLogin extends Activity
                 try {
                     if (json != null) {
                         String text = "<b>Name :</b> " + json.getString("name") + "<br><br><b>Email :</b> "+json.getString("email")+"<br><br><b>Profile link :</b> "+json.getString("link");
-                        details_txt.setText(Html.fromHtml(text));
-                        profile.setProfileId(json.getString("id"));
+                   //     details_txt.setText(Html.fromHtml(text));
+                    //    profile.setProfileId(json.getString("id"));
                     }
 
                 } catch (JSONException e) {

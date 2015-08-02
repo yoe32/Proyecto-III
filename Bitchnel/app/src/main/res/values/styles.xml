@@ -17,5 +17,14 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="AppBase" parent="@style/Theme.AppCompat"></style>
+
+    <!--Food brackground
+    <style name="FoodAppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item
+            name="android:windowBackground"><strong>@drawable/food_intro_gradient</strong>
+
+        </item>
+    </style>-->
 </resources>
 
