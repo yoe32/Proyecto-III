@@ -1,7 +1,10 @@
 package DAO;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import Main.Restaurant;
 
 public class RestaurantService extends Service
@@ -26,6 +29,366 @@ public class RestaurantService extends Service
 		}
 
 		desconectar();
+	}
+	
+	public String getNameInfo(String email) 
+	{
+		String name = "";
+		conectar();
+
+		try 
+		{
+			Statement st = null;
+			st = getConexion().createStatement();
+			ResultSet rs = st.executeQuery("SELECT restaurant_name, restaurant_email FROM restaurant_profile WHERE restaurant_email='" + email + "'");
+
+			while (rs.next()) 
+			{
+				if (email.equals(rs.getString(2)))
+				{
+					System.out.println("Desde restaurant service " + rs.getString(1));
+					name = rs.getString(1);
+				}
+			}
+			
+			if (rs != null) 
+			{
+				rs.close();
+			}
+
+			if (st != null) 
+			{
+				st.close();
+			}
+		} 
+		
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		desconectar();
+		return name;
+	}
+	
+	public String getDescriptionInfo(String email) 
+	{
+		String description = "";
+		conectar();
+
+		try 
+		{
+			Statement st = null;
+			st = getConexion().createStatement();
+			ResultSet rs = st.executeQuery("SELECT restaurant_description, restaurant_email FROM restaurant_profile WHERE restaurant_email='" + email + "'");
+
+			while (rs.next()) 
+			{
+				if (email.equals(rs.getString(2)))
+				{
+					System.out.println("Desde restaurant service " + rs.getString(1));
+					description = rs.getString(1);
+				}
+			}
+			
+			if (rs != null) 
+			{
+				rs.close();
+			}
+
+			if (st != null) 
+			{
+				st.close();
+			}
+		} 
+		
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		desconectar();
+		return description;
+	}
+	
+	public String getProvinceInfo(String email) 
+	{
+		String province = "";
+		conectar();
+
+		try 
+		{
+			Statement st = null;
+			st = getConexion().createStatement();
+			ResultSet rs = st.executeQuery("SELECT restaurant_province, restaurant_email FROM restaurant_profile WHERE restaurant_email='" + email + "'");
+
+			while (rs.next()) 
+			{
+				if (email.equals(rs.getString(2)))
+				{
+					System.out.println("Desde restaurant service " + rs.getString(1));
+					province = rs.getString(1);
+				}
+			}
+			
+			if (rs != null) 
+			{
+				rs.close();
+			}
+
+			if (st != null) 
+			{
+				st.close();
+			}
+		} 
+		
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		desconectar();
+		return province;
+	}
+	
+	public String getLocationInfo(String email) 
+	{
+		String location = "";
+		conectar();
+
+		try 
+		{
+			Statement st = null;
+			st = getConexion().createStatement();
+			ResultSet rs = st.executeQuery("SELECT restaurant_location, restaurant_email FROM restaurant_profile WHERE restaurant_email='" + email + "'");
+
+			while (rs.next()) 
+			{
+				if (email.equals(rs.getString(2)))
+				{
+					System.out.println("Desde restaurant service " + rs.getString(1));
+					location = rs.getString(1);
+				}
+			}
+			
+			if (rs != null) 
+			{
+				rs.close();
+			}
+
+			if (st != null) 
+			{
+				st.close();
+			}
+		} 
+		
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		desconectar();
+		return location;
+	}
+	
+	public int getPhone1Info(String email) 
+	{
+		int phonei = 0;
+		conectar();
+
+		try 
+		{
+			Statement st = null;
+			st = getConexion().createStatement();
+			ResultSet rs = st.executeQuery("SELECT restaurant_phone1, restaurant_email FROM restaurant_profile WHERE restaurant_email='" + email + "'");
+
+			while (rs.next()) 
+			{
+				if (email.equals(rs.getString(2)))
+				{
+					System.out.println("Desde restaurant service " + rs.getInt(1));
+					phonei = rs.getInt(1);
+				}
+			}
+			
+			if (rs != null) 
+			{
+				rs.close();
+			}
+
+			if (st != null) 
+			{
+				st.close();
+			}
+		} 
+		
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		desconectar();
+		return phonei;
+	}
+	
+	public int getPhone2Info(String email) 
+	{
+		int phoneii = 0;
+		conectar();
+
+		try 
+		{
+			Statement st = null;
+			st = getConexion().createStatement();
+			ResultSet rs = st.executeQuery("SELECT restaurant_phone2, restaurant_email FROM restaurant_profile WHERE restaurant_email='" + email + "'");
+
+			while (rs.next()) 
+			{
+				if (email.equals(rs.getString(2)))
+				{
+					System.out.println("Desde restaurant service " + rs.getInt(1));
+					phoneii = rs.getInt(1);
+				}
+			}
+			
+			if (rs != null) 
+			{
+				rs.close();
+			}
+
+			if (st != null) 
+			{
+				st.close();
+			}
+		} 
+		
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		desconectar();
+		return phoneii;
+	}
+	
+	public int getPhone3Info(String email) 
+	{
+		int phoneiii = 0;
+		conectar();
+
+		try 
+		{
+			Statement st = null;
+			st = getConexion().createStatement();
+			ResultSet rs = st.executeQuery("SELECT restaurant_phone3, restaurant_email FROM restaurant_profile WHERE restaurant_email='" + email + "'");
+
+			while (rs.next()) 
+			{
+				if (email.equals(rs.getString(2)))
+				{
+					System.out.println("Desde restaurant service " + rs.getInt(1));
+					phoneiii = rs.getInt(1);
+				}
+			}
+			
+			if (rs != null) 
+			{
+				rs.close();
+			}
+
+			if (st != null) 
+			{
+				st.close();
+			}
+		} 
+		
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		desconectar();
+		return phoneiii;
+	}
+	
+	public String getScheduleInfo(String email) 
+	{
+		String schedule = "";
+		conectar();
+
+		try 
+		{
+			Statement st = null;
+			st = getConexion().createStatement();
+			ResultSet rs = st.executeQuery("SELECT restaurant_schedule, restaurant_email FROM restaurant_profile WHERE restaurant_email='" + email + "'");
+
+			while (rs.next()) 
+			{
+				if (email.equals(rs.getString(2)))
+				{
+					System.out.println("Desde restaurant service " + rs.getString(1));
+					schedule = rs.getString(1);
+				}
+			}
+			
+			if (rs != null) 
+			{
+				rs.close();
+			}
+
+			if (st != null) 
+			{
+				st.close();
+			}
+		} 
+		
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		desconectar();
+		return schedule;
+	}
+	
+	public byte[] getImgInfo(String email) 
+	{
+		byte[] img = {0x00,0x00,0x00,0x00};
+		conectar();
+
+		try 
+		{
+			Statement st = null;
+			st = getConexion().createStatement();
+			ResultSet rs = st.executeQuery("SELECT restaurant_img, restaurant_email FROM restaurant_profile WHERE restaurant_email='" + email + "'");
+
+			while (rs.next()) 
+			{
+				if (email.equals(rs.getString(2)))
+				{
+					System.out.println("Desde restaurant service " + rs.getBytes(1));
+					img = rs.getBytes(1);
+				}
+			}
+			
+			if (rs != null) 
+			{
+				rs.close();
+			}
+
+			if (st != null) 
+			{
+				st.close();
+			}
+		} 
+		
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		desconectar();
+		return img;
 	}
 
 	public void updateEmail()

@@ -5,132 +5,259 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ph="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:m="http://code.google.com/p/gmaps4jsf/">
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:head>
-	<title>#{loginBean.email}</title>
 
-	<h:outputStylesheet library="css" name="bootstrap.css" />
-	<h:outputStylesheet library="css" name="dashboard.css" />
+	<script src="http://maps.google.com/maps/api/js?sensor=true|false"
+		type="text/javascript"></script>
 
-	<h:outputScript library="js" name="jquery-2.1.4.js" />
-	<h:outputScript library="js" name="bootstrap.js" />
-	<h:outputScript library="js" name="holder.min.js" />
 	<h:outputScript library="js" name="jquery.qrcode-0.12.0.min.js" />
-	
-	<script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?sensor=true">
-    </script>
+
+	<script type="text/javascript">
+		var currentMarker = null;
+
+		function handlePointClick(event) {
+			if (currentMarker === null) {
+				document.getElementById('lat').value = event.latLng.lat();
+				document.getElementById('lng').value = event.latLng.lng();
+
+				currentMarker = new google.maps.Marker({
+					position : new google.maps.LatLng(event.latLng.lat(),
+							event.latLng.lng())
+				});
+
+				PF('map').addOverlay(currentMarker);
+
+				PF('dlg').show();
+			}
+		}
+
+		function markerAddComplete() {
+			var title = document.getElementById('title');
+			currentMarker.setTitle(title.value);
+			title.value = "";
+
+			currentMarker = null;
+			PF('dlg').hide();
+		}
+
+		function cancel() {
+			PF('dlg').hide();
+			currentMarker.setMap(null);
+			currentMarker = null;
+
+			return false;
+		}
+	</script>
+
 </h:head>
 
 <h:body>
 
-<script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?sensor=true">
-    </script>
+	<h:form>
+		<p:growl id="messages" />
 
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-				aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Restaurant</a>
-		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav navbar-left">
-				<li role="presentation" class="active"><a href="#home"
-					aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-				<li role="presentation"><a href="#profile"
-					aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-				<li role="presentation"><a href="#settings"
-					aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-			</ul>
-			<form class="navbar-form navbar-right">
-				<input type="text" class="form-control" placeholder="Search..." />
-			</form>
-		</div>
-	</div>
-	</nav>
 
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<li><img src="resources/img/Dejiitaru.png"
-						class="img-responsive" alt="" /></li>
-					<li role="presentation"><a href="#menu" aria-controls="home"
-						role="tab" data-toggle="tab">Menu</a></li>
-					<li role="presentation"><a href="#event" aria-controls="home"
-						role="tab" data-toggle="tab">Event</a></li>
-					<li role="presentation"><a href="#gallery"
-						aria-controls="home" role="tab" data-toggle="tab">Gallery</a></li>
-				</ul>
-			</div>
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h1 class="page-header">Dashboard</h1>
+		<p:menubar>
+			<p:menuitem value="Quit" url="http://www.primefaces.org"
+				icon="ui-icon-close" />
 
-				<div>
-					<!-- Tab panes -->
-					<div class="tab-content">
-						<div role="tabpanel" class="tab-pane active" id="home">
+			<p:menuitem value="Demos" icon="ui-icon-search" />
+			<p:submenu label="Edit" icon="ui-icon-pencil">
+				<p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />
+				<p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			</p:submenu>
 
-							<h:form>
-								<p:panelGrid columns="2">
-									<h:outputText value="QR" />
-									<p:barcode
-										value="http://localhost:8080/BitchnelWeb/faces/restaurant.xhtml"
-										type="qr" />
-								</p:panelGrid>
-								
-								
-								<m:map width="500px" height="500px" latitude="30.01" longitude="31.14" />
-								
-								 <m:map address="#{addressBean.address}">
-         <m:marker/>
-         <m:htmlInformationWindow htmlText="#{addressBean.address}"/>
-  </m:map>
-  
-  <m:map width="90%" height="90%" latitude="24" longitude="15">                       
-        <m:eventListener eventName="moveend" jsFunction="mapMoveEndHandler"/>           
-    </m:map>
-								
+			<p:submenu label="Help" icon="ui-icon-help">
+				<p:menuitem value="Contents" url="#" />
+				<p:submenu label="Search" icon="ui-icon-search">
+					<p:submenu label="Text">
+						<p:menuitem value="Workspace" url="#" />
+					</p:submenu>
+					<p:menuitem value="File" url="#" />
+				</p:submenu>
+			</p:submenu>
+
+			<p:submenu label="Actions" icon="ui-icon-gear">
+				<p:submenu label="Ajax" icon="ui-icon-refresh">
+					<p:menuitem value="Save" actionListener="#{menuView.save}"
+						icon="ui-icon-disk" update="messages" />
+					<p:menuitem value="Update" actionListener="#{menuView.update}"
+						icon="ui-icon-arrowrefresh-1-w" update="messages" />
+				</p:submenu>
+				<p:submenu label="Non-Ajax" icon="ui-icon-newwin">
+					<p:menuitem value="Delete" actionListener="#{menuView.delete}"
+						icon="ui-icon-close" update="messages" ajax="false" />
+				</p:submenu>
+			</p:submenu>
+
+			<p:menuitem value="Quit" url="http://www.primefaces.org"
+				icon="ui-icon-close" />
+
+			<f:facet name="options">
+				<p:inputText style="margin-right:10px" placeholder="Search" />
+				<p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+	<p:panelGrid columns="1" layout="grid">
+		<h:form>
+
+			<p:panel id="basic" header="Profile" style="margin-bottom:20px">
+				<h:panelGrid columns="4" cellpadding="10">
+					<p:graphicImage name="resources/img/Dejiitaru.png" />
+					<ul class="list-group">
+						<li class="list-group-item list-group-item-success">Restaurant
+							Name: #{loginBean.name}</li>
+						<li class="list-group-item list-group-item-info">Restaurant
+							Province: #{loginBean.province}</li>
+						<li class="list-group-item list-group-item-warning">Restaurant
+							Phone I: #{loginBean.phonei}</li>
+						<li class="list-group-item list-group-item-danger">Restaurant
+							Phone II: #{loginBean.phoneii}</li>
+						<li class="list-group-item list-group-item-success">Restaurant
+							Phone III: #{loginBean.phoneiii}</li>
+						<li class="list-group-item list-group-item-info">Restaurant
+							Province: #{loginBean.schedule}</li>
+					</ul>
+					<p:gmap center="9.9916621,-84.0605511" zoom="10" type="ROADMAP"
+						style="width:400px;height:200px" />
+
+					<pe:qrCode id="qrCodeElem"
+						renderMethod="#{qRCodeController.renderMethod}"
+						renderMode="#{qRCodeController.mode}"
+						text="#{qRCodeController.text}" label="#{qRCodeController.label}"
+						size="#{qRCodeController.size}"
+						fillColor="#{qRCodeController.fillColor}" fontName="Ubuntu"
+						fontColor="#01A9DB" ecLevel="H" radius="0.5" />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+
+		<h:form>
+			<p:panel id="basic" header="Menu" style="margin-bottom:20px">
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+					<h:outputText value="The story begins as Don Vito Corleone..." />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+
+		<h:form>
+			<p:panel id="basic" header="Events" style="margin-bottom:20px">
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+					<h:outputText value="The story begins as Don Vito Corleone..." />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+
+		<h:form>
+			<p:panel id="basic" header="Gallery" style="margin-bottom:20px">
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:galleria value="#{imagesView.images}" var="image"
+						panelWidth="500" panelHeight="313" showCaption="true">
+						<p:graphicImage name="demo/images/nature/#{image}"
+							alt="Image Description for #{image}" title="#{image}" />
+					</p:galleria>
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+
+		<h:form>
+			<p:panel id="basic" header="Notifications" style="margin-bottom:20px">
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+					<h:outputText value="The story begins as Don Vito Corleone..." />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+
+		<p:growl id="messages" showDetail="true" />
+
+		<h:form>
+			<p:panel id="basic" header="Settings" style="margin-bottom:20px">
+				<h:panelGrid columns="2" cellpadding="10">
+
+					<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
+						value="Show Map" onclick="PF('dlg').show();" />
+
+					<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
+						modal="true">
+
+						<p:gmap id="gmap" center="36.890257,30.707417" zoom="13"
+							type="HYBRID" style="width:100%;height:400px"
+							model="#{addMarkersView.emptyModel}"
+							onPointClick="handlePointClick(event);" widgetVar="map" />
+
+						<p:dialog widgetVar="dlg" showEffect="fade">
+							<h:form prependId="false">
+								<h:panelGrid columns="2">
+									<h:outputLabel for="title" value="Title:" />
+									<p:inputText id="title" value="#{addMarkersView.title}" />
+
+									<f:facet name="footer">
+										<p:commandButton value="Add"
+											actionListener="#{addMarkersView.addMarker}"
+											update=":messages" oncomplete="markerAddComplete()" />
+										<p:commandButton value="Cancel" onclick="return cancel()" />
+									</f:facet>
+								</h:panelGrid>
+
+								<h:inputHidden id="lat" value="#{addMarkersView.lat}" />
+								<h:inputHidden id="lng" value="#{addMarkersView.lng}" />
 							</h:form>
+						</p:dialog>
 
-							<h:messages infoStyle="color: blue;list-style:none;" />
-							<h:outputLabel value="Ingreso con el usuario: " />
-							<h:outputText value="#{restaurantBean.email}" />
-							<h:form>
-								<h:commandButton value="Logout" action="#{loginBean.logout()}" />
-							</h:form>
+						<script type="text/javascript">
+							var currentMarker = null;
 
-							<h:form>
-								<p>Welcome, #{loginBean.email}</p>
-								<p:commandButton action="#{loginBean.logout()}" value="Logout"
-									ajax="false"></p:commandButton>
-							</h:form>
+							function handlePointClick(event) {
+								if (currentMarker === null) {
+									document.getElementById('lat').value = event.latLng
+											.lat();
+									document.getElementById('lng').value = event.latLng
+											.lng();
 
-						</div>
+									currentMarker = new google.maps.Marker({
+										position : new google.maps.LatLng(
+												event.latLng.lat(),
+												event.latLng.lng())
+									});
 
+									PF('map').addOverlay(currentMarker);
 
-						<div role="tabpanel" class="tab-pane" id="profile">proile</div>
-						<div role="tabpanel" class="tab-pane" id="settings">settings</div>
-						<div role="tabpanel" class="tab-pane" id="menu">menu</div>
-						<div role="tabpanel" class="tab-pane" id="event">event</div>
-						<div role="tabpanel" class="tab-pane" id="gallery">gallery</div>
-					</div>
+									PF('dlg').show();
+								}
+							}
 
-				</div>
+							function markerAddComplete() {
+								var title = document.getElementById('title');
+								currentMarker.setTitle(title.value);
+								title.value = "";
 
-			</div>
-		</div>
-	</div>
+								currentMarker = null;
+								PF('dlg').hide();
+							}
+
+							function cancel() {
+								PF('dlg').hide();
+								currentMarker.setMap(null);
+								currentMarker = null;
+
+								return false;
+							}
+						</script>
+					</p:dialog>
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+	</p:panelGrid>
 
 </h:body>
 </html>

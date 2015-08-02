@@ -1,5 +1,7 @@
 package Bean;
 
+import DAO.RestaurantService;
+
 public class RestaurantBean
 {
 	private String name;
@@ -13,6 +15,8 @@ public class RestaurantBean
 	private int phoneiii;
 	private String schedule;
 	private byte[] img;
+	
+	RestaurantService rs = new RestaurantService();
 	
 	public void updateName()
 	{
