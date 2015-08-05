@@ -1,9 +1,9 @@
-package DAO;
+package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import Main.Restaurant;
+import main.Restaurant;
 
 public class RegisterService extends Service
 {

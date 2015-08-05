@@ -1,34 +1,52 @@
-package DAO;
+package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import Main.Restaurant;
+import main.Restaurant;
 
 public class RestaurantService extends Service
 {
-
-	public void updateName(Restaurant restaurant)
+	public int getIdInfo(String email) 
 	{
+		int id = 0;
 		conectar();
 
-		try {
-			PreparedStatement ps = getConexion().prepareStatement("UPDATE restaurant_profile SET ");
-			ps.setInt(1, restaurant.getId());
-			ps.setString(2, restaurant.getName());
-			ps.executeUpdate();
+		try 
+		{
+			Statement st = null;
+			st = getConexion().createStatement();
+			ResultSet rs = st.executeQuery("SELECT restaurant_profile_id, restaurant_email FROM restaurant_profile WHERE restaurant_email='" + email + "'");
 
-			if (ps != null) {
-				ps.close();
+			while (rs.next()) 
+			{
+				if (email.equals(rs.getString(2)))
+				{
+					System.out.println("Desde restaurant service " + rs.getInt(1));
+					id = rs.getInt(1);
+				}
+			}
+			
+			if (rs != null) 
+			{
+				rs.close();
 			}
 
-		} catch (SQLException e) {
+			if (st != null) 
+			{
+				st.close();
+			}
+		} 
+		
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
 		}
-
+		
 		desconectar();
+		return id;
 	}
 	
 	public String getNameInfo(String email) 
@@ -380,7 +398,7 @@ public class RestaurantService extends Service
 			{
 				st.close();
 			}
-		} 
+		}
 		
 		catch (SQLException e) 
 		{
@@ -389,6 +407,32 @@ public class RestaurantService extends Service
 		
 		desconectar();
 		return img;
+	}
+	
+	public void uploadProfileImage()
+	{
+		
+	}
+	
+	public void updateName(Restaurant restaurant)
+	{
+		conectar();
+
+		try {
+			PreparedStatement ps = getConexion().prepareStatement("UPDATE restaurant_profile SET ");
+			ps.setInt(1, restaurant.getId());
+			ps.setString(2, restaurant.getName());
+			ps.executeUpdate();
+
+			if (ps != null) {
+				ps.close();
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		desconectar();
 	}
 
 	public void updateEmail()

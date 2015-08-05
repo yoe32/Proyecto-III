@@ -1,4 +1,4 @@
-package Bean;
+package bean;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;

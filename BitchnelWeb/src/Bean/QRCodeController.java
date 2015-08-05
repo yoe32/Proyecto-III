@@ -1,4 +1,4 @@
-package Bean;
+package bean;
 
 import java.io.Serializable;
 
@@ -16,7 +16,7 @@ public class QRCodeController implements Serializable
     public QRCodeController() {  
         renderMethod = "canvas";  
         text = "http://primefaces-extensions.github.io/";  
-        label = "PF-Extensions";  
+        label = "Yolo";  
         mode = 2;  
         fillColor = "7d767d";  
         size = 200;  

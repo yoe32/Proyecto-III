@@ -5,29 +5,34 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
 	<managed-bean>
-		<managed-bean-name>loginBean</managed-bean-name>
-		<managed-bean-class>Bean.LoginBean</managed-bean-class>
+		<managed-bean-name>globalBean</managed-bean-name>
+		<managed-bean-class>bean.GlobalBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>registerBean</managed-bean-name>
-		<managed-bean-class>Bean.RegisterBean</managed-bean-class>
+		<managed-bean-class>bean.RegisterBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>restaurantBean</managed-bean-name>
-		<managed-bean-class>Bean.RestaurantBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-class>bean.RestaurantBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>addMarkersView</managed-bean-name>
-		<managed-bean-class>Bean.AddMarkersView</managed-bean-class>
+		<managed-bean-class>bean.AddMarkersView</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>qRCodeController</managed-bean-name>
-		<managed-bean-class>Bean.QRCodeController</managed-bean-class>
+		<managed-bean-class>bean.QRCodeController</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>uploadImage</managed-bean-name>
+		<managed-bean-class>bean.UploadImage</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	
 	<navigation-rule>

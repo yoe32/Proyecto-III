@@ -1,6 +1,6 @@
-package Bean;
+package bean;
 
-import DAO.RestaurantService;
+import dao.RestaurantService;
 
 public class RestaurantBean
 {

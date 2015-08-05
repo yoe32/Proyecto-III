@@ -32,13 +32,13 @@
 			<div class="inputs">
 				<h:form>
 					<h:inputText type="email" placeholder="e-mail"
-						value="#{loginBean.email}" required="true" />
+						value="#{globalBean.email}" required="true" />
 
 					<h:inputSecret type="password" placeholder="password"
-						value="#{loginBean.password}" required="true" />
+						value="#{globalBean.password}" required="true" />
 
 					<h:commandButton id="submit" value="Login :D"
-						action="#{loginBean.login(loginBean.email, loginBean.password)}">
+						action="#{globalBean.login(globalBean.email, globalBean.password)}">
 					</h:commandButton>
 					<h:link value="Register" outcome="register" />
 					<h:messages style="color:red;margin:8px;" />

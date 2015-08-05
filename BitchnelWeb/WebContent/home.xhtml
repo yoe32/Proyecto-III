@@ -109,20 +109,15 @@
 
 			<p:panel id="basic" header="Profile" style="margin-bottom:20px">
 				<h:panelGrid columns="4" cellpadding="10">
-					<p:graphicImage name="resources/img/Dejiitaru.png" />
+					<p:graphicImage name="resources/img/Dejiitaru.png" url="/image" />
+					 <h:graphicImage id="image" alt="uploaded image" url="/BitchnelWeb"/>
 					<ul class="list-group">
-						<li class="list-group-item list-group-item-success">Restaurant
-							Name: #{loginBean.name}</li>
-						<li class="list-group-item list-group-item-info">Restaurant
-							Province: #{loginBean.province}</li>
-						<li class="list-group-item list-group-item-warning">Restaurant
-							Phone I: #{loginBean.phonei}</li>
-						<li class="list-group-item list-group-item-danger">Restaurant
-							Phone II: #{loginBean.phoneii}</li>
-						<li class="list-group-item list-group-item-success">Restaurant
-							Phone III: #{loginBean.phoneiii}</li>
-						<li class="list-group-item list-group-item-info">Restaurant
-							Province: #{loginBean.schedule}</li>
+						<li class="list-group-item list-group-item-success">Name: #{global.name}</li>
+						<li class="list-group-item list-group-item-info">Province: #{globalBean.province}</li>
+						<li class="list-group-item list-group-item-warning">Phone I: #{globalBean.phonei}</li>
+						<li class="list-group-item list-group-item-danger">Phone II: #{globalBean.phoneii}</li>
+						<li class="list-group-item list-group-item-success">Phone III: #{globalBean.phoneiii}</li>
+						<li class="list-group-item list-group-item-info">Province: #{globalBean.schedule}</li>
 					</ul>
 					<p:gmap center="9.9916621,-84.0605511" zoom="10" type="ROADMAP"
 						style="width:400px;height:200px" />
@@ -156,14 +151,44 @@
 			</p:panel>
 		</h:form>
 
-		<h:form>
-			<p:panel id="basic" header="Gallery" style="margin-bottom:20px">
-				<h:panelGrid columns="2" cellpadding="10">
-					<p:galleria value="#{imagesView.images}" var="image"
-						panelWidth="500" panelHeight="313" showCaption="true">
-						<p:graphicImage name="demo/images/nature/#{image}"
-							alt="Image Description for #{image}" title="#{image}" />
-					</p:galleria>
+		<h:form enctype="multipart/form-data">
+			<p:panel id="gallery" header="Gallery" style="margin-bottom:20px">
+				<h:panelGrid columns="3" cellpadding="10">
+
+					<p:panel id="subpanel1" header="Slideshow"
+						style="margin-bottom:20px">
+						<h:panelGrid columns="1" cellpadding="10">
+							<p:galleria value="#{imagesView.images}" var="image"
+								panelWidth="500" panelHeight="313" showCaption="true">
+								<p:graphicImage name="demo/images/nature/#{image}"
+									alt="Image Description for #{image}" title="#{image}" />
+							</p:galleria>
+						</h:panelGrid>
+					</p:panel>
+
+					<p:panel id="subpanel2" header="Gallery Table"
+						style="margin-bottom:20px">
+						<h:panelGrid columns="1" cellpadding="10">
+
+
+
+						</h:panelGrid>
+					</p:panel>
+
+					<p:panel id="subpanel3" header="Add Images"
+						style="margin-bottom:20px">
+						<h:panelGrid columns="1" cellpadding="10">
+
+							
+					<p:fileUpload fileUploadListener="#{globalBean.handleFileUpload}" mode="advanced" dragDropSupport="true"
+                          update="messages" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+ 
+    <p:growl id="messages" showDetail="true" />
+						
+
+						</h:panelGrid>
+					</p:panel>
+
 				</h:panelGrid>
 			</p:panel>
 		</h:form>

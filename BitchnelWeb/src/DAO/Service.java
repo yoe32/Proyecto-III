@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -48,5 +48,10 @@ public abstract class Service
 	protected Connection getConexion() 
 	{
        return this.conexion;
-   }
+    }
+	
+	public Connection getConnection() 
+	{
+       return this.conexion;
+    }
 }

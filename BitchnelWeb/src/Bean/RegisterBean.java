@@ -1,8 +1,8 @@
-package Bean;
+package bean;
 
-import Bean.LoginBean;
-import DAO.RegisterService;
-import Main.Restaurant;
+import bean.GlobalBean;
+import dao.RegisterService;
+import main.Restaurant;
 
 public class RegisterBean
 {
@@ -21,7 +21,7 @@ public class RegisterBean
 
 	RegisterService rs = new RegisterService();
 	Restaurant res = new Restaurant();
-	LoginBean lb = new LoginBean();
+	GlobalBean lb = new GlobalBean();
 
 	public String register()
 	{
