@@ -110,7 +110,6 @@
 			<p:panel id="basic" header="Profile" style="margin-bottom:20px">
 				<h:panelGrid columns="4" cellpadding="10">
 					<p:graphicImage name="resources/img/Dejiitaru.png" url="/image" />
-					 <h:graphicImage id="image" alt="uploaded image" url="/BitchnelWeb"/>
 					<ul class="list-group">
 						<li class="list-group-item list-group-item-success">Name: #{global.name}</li>
 						<li class="list-group-item list-group-item-info">Province: #{globalBean.province}</li>
@@ -168,9 +167,36 @@
 
 					<p:panel id="subpanel2" header="Gallery Table"
 						style="margin-bottom:20px">
-						<h:panelGrid columns="1" cellpadding="10">
+						<h:panelGrid columns="5" cellpadding="10">
 
-
+							<p:dataTable value="#{tableBean.allImage}" var="item" paginator="true" rows="5"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 60px;" >           
+                <f:facet name="header">
+                        <h:outputText value="Image showing from database" />
+                    </f:facet>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Image Id" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageID}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Image Name" />
+                    </f:facet>
+                    <h:outputText value="#{item.imageName}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Image" />
+                    </f:facet>
+                    <h:outputLink value="DisplayImage?Image_id=#{item.imageID}" target="_blank" >
+                        <h:graphicImage value="DisplayImage?Image_id=#{item.imageID}" width="50" height="50"></h:graphicImage>
+                    </h:outputLink>
+ 
+                </p:column>
+            </p:dataTable>
 
 						</h:panelGrid>
 					</p:panel>

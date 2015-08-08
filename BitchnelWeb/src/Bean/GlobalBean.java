@@ -8,13 +8,9 @@ import org.primefaces.event.FileUploadEvent;
 import dao.*;
 import dao.LoginService;
 import dao.RestaurantService;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.sql.*;
 
-public class GlobalBean extends HttpServlet
+public class GlobalBean
 {
-	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private String email;
@@ -88,41 +84,6 @@ public class GlobalBean extends HttpServlet
 		
 	}
 	
-	 @Override
-	    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
-	 {
-	        // Get last uploaded image
-	        try {
-	            // Image bytes
-	            byte[] imageBytes = null;
-	             
-	           
-	            // Connect to the database
-	            Connection connection = gs.getConnection();
-	             
-	            // Create the statement
-	            // This query is specific to MySQL, it returns only one row (using 'LIMIT 1') - the last uploaded file
-	            PreparedStatement statement = connection.prepareStatement("SELECT restaurant_profile_id, restaurant_picture, restaurant_picture_name FROM restaurant_gallery WHERE restaurant_profile_id='" + id + "'");
-	             
-	            ResultSet rs = statement.executeQuery();
-	             
-	            while (rs.next()) { // This will run only once
-	                imageBytes = rs.getBytes("restaurant_picture");
-	            }
-	 
-	            // Close the connection
-	            connection.close();
-	             
-	            resp.getOutputStream().write(imageBytes);
-	            resp.getOutputStream().close();
-	             
-	        } catch (Exception e) {
-	            // Display error message
-	            resp.getWriter().write(e.getMessage());
-	            resp.getWriter().close();
-	        }
-	         
-	    }
 
 	public String getName() {
 		return name;

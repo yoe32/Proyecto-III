@@ -5,8 +5,7 @@ import dao.RestaurantService;
 public class RestaurantBean
 {
 	private String name;
-	private String email;
-	private String password;
+	private String email = Util.getUserName();
 	private String description;
 	private String province;
 	private String location;
@@ -85,12 +84,7 @@ public class RestaurantBean
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
 	public String getDescription() {
 		return description;
 	}

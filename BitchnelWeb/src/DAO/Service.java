@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public abstract class Service 
 {
-	private Connection conexion = null;
+	private static Connection conexion = null;
     private final String url = "jdbc:mysql://localhost:3306/bitchneldb";
     private final String user = "root";
     private final String password = "root";
@@ -47,11 +47,11 @@ public abstract class Service
 	
 	protected Connection getConexion() 
 	{
-       return this.conexion;
+       return Service.conexion;
     }
 	
-	public Connection getConnection() 
+	public static Connection getConnection() 
 	{
-       return this.conexion;
+       return conexion;
     }
 }

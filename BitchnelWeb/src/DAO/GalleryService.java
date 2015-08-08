@@ -68,4 +68,5 @@ public class GalleryService extends Service
 		desconectar();
 		return id;
 	}
+	
 }

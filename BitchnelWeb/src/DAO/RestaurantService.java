@@ -45,7 +45,6 @@ public class RestaurantService extends Service
 			e.printStackTrace();
 		}
 		
-		desconectar();
 		return id;
 	}
 	
@@ -408,6 +407,7 @@ public class RestaurantService extends Service
 		desconectar();
 		return img;
 	}
+	
 	
 	public void uploadProfileImage()
 	{

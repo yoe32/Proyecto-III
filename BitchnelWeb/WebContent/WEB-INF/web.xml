@@ -24,22 +24,10 @@
 		<url-pattern>/faces/*</url-pattern>
 		<url-pattern>/xhtml/*</url-pattern>
 	</servlet-mapping>
-	
-	<!-- Servlet that displays latest uploaded file -->
-    <servlet>
-     	<description></description>
-        <display-name>GlobalBean</display-name>
-        <servlet-name>GlobalBean</servlet-name>
-        <servlet-class>bean.GlobalBean</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>GlobalBean</servlet-name>
-        <url-pattern>/BitchnelWeb</url-pattern>
-    </servlet-mapping>
 		
 	<session-config>
         <session-timeout>
-            30
+            10
         </session-timeout>
     </session-config>
 	<context-param>

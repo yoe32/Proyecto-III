@@ -20,19 +20,9 @@
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>addMarkersView</managed-bean-name>
-		<managed-bean-class>bean.AddMarkersView</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
 		<managed-bean-name>qRCodeController</managed-bean-name>
 		<managed-bean-class>bean.QRCodeController</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>uploadImage</managed-bean-name>
-		<managed-bean-class>bean.UploadImage</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	
 	<navigation-rule>
