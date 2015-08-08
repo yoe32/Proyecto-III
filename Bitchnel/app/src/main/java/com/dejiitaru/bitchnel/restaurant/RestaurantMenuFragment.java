@@ -6,25 +6,17 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.dejiitaru.bitchnel.R;
 import com.dejiitaru.bitchnel.adapter.CustomListAdapter;
-import com.dejiitaru.bitchnel.adapter.TabsPagerAdapter;
 import com.dejiitaru.bitchnel.app.AppController;
 import com.dejiitaru.bitchnel.model.Movie;
-
-import android.app.ActionBar;
 import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,34 +27,133 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantMenuFragment extends ListFragment implements AdapterView.OnItemClickListener {
+public class RestaurantMenuFragment extends Fragment {
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_restaurant_menu, container, false);
+	// Log tag
+	private static final String TAG = RestaurantMenuFragment.class.getSimpleName();
 
-		return view;
+	// Movies json url
+	private static final String url = "http://api.androidhive.info/json/movies.json";
+	private ProgressDialog pDialog;
+	private List<Movie> movieList = new ArrayList<Movie>();
+	private ListView listView;
+	private CustomListAdapter adapter;
+
+
+	private void fetch() {
+		final JsonArrayRequest movieReq = new JsonArrayRequest(
+				url,
+				new Response.Listener<JSONArray>(){
+			@Override
+			public void onResponse(JSONArray response)  {
+				hidePDialog();
+
+				// Parsing json
+				for (int i = 0; i < response.length(); i++) {
+					try {
+
+						JSONObject obj = response.getJSONObject(i);
+						Movie movie = new Movie();
+						movie.setTitle(obj.getString("title"));
+						movie.setThumbnailUrl(obj.getString("image"));
+						movie.setRating(((Number) obj.get("rating"))
+								.doubleValue());
+						movie.setYear(obj.getInt("releaseYear"));
+
+						// Genre is json array
+						JSONArray genreArry = obj.getJSONArray("genre");
+						ArrayList<String> genre = new ArrayList<String>();
+						for (int j = 0; j < genreArry.length(); j++) {
+							genre.add((String) genreArry.get(j));
+						}
+						movie.setGenre(genre);
+
+						// adding movie to movies array
+						movieList.add(movie);
+
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+
+				}
+
+				// notifying list adapter about data changes
+				// so that it renders the list view with updated data
+				adapter.notifyDataSetChanged();
+			}
+		}, new Response.ErrorListener() {
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				VolleyLog.d(TAG, "Error: " + error.getMessage());
+				hidePDialog();
+
+			}
+
+		});
+		// Adding request to request queue
+		AppController.getInstance().addToRequestQueue(movieReq);
+
 	}
-
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-
+	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		adapter = new CustomListAdapter(getActivity(),movieList);
+		ListView listView = (ListView) getView().findViewById(R.id.listViewMenu);
+		listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
 
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.Planets, android.R.layout.simple_list_item_1);
+		listView.setAdapter(adapter);
 
-		setListAdapter(adapter);
-		getListView().setOnItemClickListener(this);
+		fetch();
+	}
 
+	@Nullable
+	@Override
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.fragment_restaurant_menu, container, false);
+
+
+		return rootView;
+	}
+
+	public void deleteSelected(View view) {
+		//Obtengo los elementos seleccionados de mi lista
+		SparseBooleanArray seleccionados = listView.getCheckedItemPositions();
+
+		if(seleccionados==null || seleccionados.size()==0){
+			//Si no había elementos seleccionados...
+			Toast.makeText(getActivity(), "No hay elementos seleccionados", Toast.LENGTH_SHORT).show();
+		}else{
+			//si los había, miro sus valores
+
+			//Esto es para ir creando un mensaje largo que mostraré al final
+			StringBuilder resultado=new StringBuilder();
+			resultado.append("Se eliminarán los siguientes elementos:\n");
+
+			//Recorro my "array" de elementos seleccionados
+			final int size=seleccionados.size();
+			for (int i=0; i<size; i++) {
+				//Si valueAt(i) es true, es que estaba seleccionado
+				if (seleccionados.valueAt(i)) {
+					//en keyAt(i) obtengo su posición
+					resultado.append("El elemento "+seleccionados.keyAt(i)+" estaba seleccionado\n");
+				}
+			}
+			Toast.makeText(getActivity(),resultado.toString(),Toast.LENGTH_LONG).show();
+		}
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-							long id) {
-
-		Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT)
-				.show();
-
+	public void onDestroy() {
+		super.onDestroy();
+		hidePDialog();
 	}
-	    }
+
+	private void hidePDialog() {
+		if (pDialog != null) {
+			pDialog.dismiss();
+			pDialog = null;
+		}
+	}
+
+
+}

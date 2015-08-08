@@ -38,11 +38,11 @@
         android:id="@+id/plantilla_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".VolleyMainActivity" >
+        tools:context=".MainActivity" >
 
 
         <ListView
-            android:id="@+id/list"
+            android:id="@+id/listView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:divider="@color/list_divider"

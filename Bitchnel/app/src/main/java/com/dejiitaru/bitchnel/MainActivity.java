@@ -67,12 +67,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity  extends FragmentActivity implements View.OnClickListener,
+public class MainActivity  extends Activity implements View.OnClickListener,
 		GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener
 {
 	private static final int RC_SIGN_IN = 0;
 	// Logcat tag
-	private static final String TAG = "GoogleMainActivity";
+	private static final String TAG = MainActivity.class.getSimpleName();
 
 	// Profile pic image size in pixels
 	private static final int PROFILE_PIC_SIZE = 400;
@@ -160,7 +160,7 @@ public class MainActivity  extends FragmentActivity implements View.OnClickListe
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
-		listView = (ListView) findViewById(R.id.list);
+		listView = (ListView) findViewById(R.id.listView);
 		customAdapter = new CustomListAdapter(this, movieList);
 		listView.setAdapter(customAdapter);
 

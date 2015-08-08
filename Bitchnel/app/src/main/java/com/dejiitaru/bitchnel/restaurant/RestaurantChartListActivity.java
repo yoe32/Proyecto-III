@@ -33,7 +33,7 @@ import java.util.List;
  */
 public class RestaurantChartListActivity extends Activity {
 
-    // Log tag
+        // Log tag
     private static final String TAG = RestaurantChartListActivity.class.getSimpleName();
 
     // Movies json url
