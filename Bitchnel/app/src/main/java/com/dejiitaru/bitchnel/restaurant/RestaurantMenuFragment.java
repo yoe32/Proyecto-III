@@ -6,8 +6,12 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.dejiitaru.bitchnel.R;
 import com.dejiitaru.bitchnel.adapter.CustomListAdapter;
+import com.dejiitaru.bitchnel.adapter.CustomListAdapterChecked;
 import com.dejiitaru.bitchnel.app.AppController;
 import com.dejiitaru.bitchnel.model.Movie;
+import com.dejiitaru.bitchnel.model.MovieChecked;
+import com.dejiitaru.bitchnel.model.SelectViewHolder;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +21,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -27,7 +35,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantMenuFragment extends Fragment {
+public class RestaurantMenuFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
 
 	// Log tag
 	private static final String TAG = RestaurantMenuFragment.class.getSimpleName();
@@ -35,9 +44,10 @@ public class RestaurantMenuFragment extends Fragment {
 	// Movies json url
 	private static final String url = "http://api.androidhive.info/json/movies.json";
 	private ProgressDialog pDialog;
-	private List<Movie> movieList = new ArrayList<Movie>();
+	private List<MovieChecked> movieList = new ArrayList<MovieChecked>();
 	private ListView listView;
-	private CustomListAdapter adapter;
+
+	private CustomListAdapterChecked adapter;
 
 
 	private void fetch() {
@@ -53,7 +63,7 @@ public class RestaurantMenuFragment extends Fragment {
 					try {
 
 						JSONObject obj = response.getJSONObject(i);
-						Movie movie = new Movie();
+						MovieChecked movie = new MovieChecked();
 						movie.setTitle(obj.getString("title"));
 						movie.setThumbnailUrl(obj.getString("image"));
 						movie.setRating(((Number) obj.get("rating"))
@@ -97,11 +107,19 @@ public class RestaurantMenuFragment extends Fragment {
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		adapter = new CustomListAdapter(getActivity(),movieList);
-		ListView listView = (ListView) getView().findViewById(R.id.listViewMenu);
-		listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
-
-		listView.setAdapter(adapter);
+		final ListView listView = (ListView) getView().findViewById(R.id.listViewMenu);
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+											@Nullable
+											@Override
+											public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+											MovieChecked item = movieList.get(position);
+											item.toogleChecked();
+											SelectViewHolder viewHolder = (SelectViewHolder)view.getTag();
+												viewHolder.getCheckBox().setChecked(item.isChecked());
+											}
+										});
+		adapter = new CustomListAdapterChecked(getActivity(),movieList);
+				listView.setAdapter(adapter);
 
 		fetch();
 	}
@@ -110,37 +128,18 @@ public class RestaurantMenuFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_restaurant_menu, container, false);
+		// Spinner element
+		Spinner spinner = (Spinner)rootView.findViewById(R.id.spinner);
+
+		// Spinner click listener
+		spinner.setOnItemSelectedListener(this);
+
 
 
 		return rootView;
 	}
 
-	public void deleteSelected(View view) {
-		//Obtengo los elementos seleccionados de mi lista
-		SparseBooleanArray seleccionados = listView.getCheckedItemPositions();
 
-		if(seleccionados==null || seleccionados.size()==0){
-			//Si no había elementos seleccionados...
-			Toast.makeText(getActivity(), "No hay elementos seleccionados", Toast.LENGTH_SHORT).show();
-		}else{
-			//si los había, miro sus valores
-
-			//Esto es para ir creando un mensaje largo que mostraré al final
-			StringBuilder resultado=new StringBuilder();
-			resultado.append("Se eliminarán los siguientes elementos:\n");
-
-			//Recorro my "array" de elementos seleccionados
-			final int size=seleccionados.size();
-			for (int i=0; i<size; i++) {
-				//Si valueAt(i) es true, es que estaba seleccionado
-				if (seleccionados.valueAt(i)) {
-					//en keyAt(i) obtengo su posición
-					resultado.append("El elemento "+seleccionados.keyAt(i)+" estaba seleccionado\n");
-				}
-			}
-			Toast.makeText(getActivity(),resultado.toString(),Toast.LENGTH_LONG).show();
-		}
-	}
 
 	@Override
 	public void onDestroy() {

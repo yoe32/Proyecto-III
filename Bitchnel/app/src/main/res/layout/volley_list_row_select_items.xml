@@ -54,5 +54,14 @@
         android:textColor="@color/year"
         android:textSize="@dimen/year" />
 
+    <CheckBox
+        android:id="@+id/checkBox01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+      android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="6sp"
+        android:focusable="false"/>
 
 </RelativeLayout>
