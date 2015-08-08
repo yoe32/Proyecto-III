@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import dao.RestaurantService;
 
-public class QRCodeController implements Serializable
+public class QRCodeBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	RestaurantService rs = new RestaurantService();
@@ -21,7 +21,7 @@ public class QRCodeController implements Serializable
     private String fillColor;  
     
   
-    public QRCodeController() 
+    public QRCodeBean() 
     {  
         renderMethod = "canvas";  
         text = Integer.toString(id);  

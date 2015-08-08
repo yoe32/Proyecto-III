@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Login</title>
+
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputScript library="js" name="jquery-2.1.4.js" />
+</h:head>
+
+
+<!-- BEGIN BODY -->
+<h:body>
+<h:form id="form">
+
+<p:growl id="msgs" showDetail="true"/>
+ 
+   <p:dataTable id="products" var="p" value="#{productBean.showAllProducts()}" editable="true" style="margin-bottom:20px">
+       <f:facet name="header">
+           Row Editing
+       </f:facet>
+ 
+       <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}" update=":form:msgs" />
+       <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
+ 
+       <p:column headerText="Product">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{p.name}" /></f:facet>
+               <f:facet name="input"><p:inputText id="modelInput" value="#{p.name}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+ 
+       <p:column headerText="Description">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{p.description}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{p.description}" style="width:100%" label="Year"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+       
+        <p:column headerText="Price">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{p.price}" /></f:facet>
+               <f:facet name="input"><p:inputText value="#{p.price}" style="width:100%" label="Year"/></f:facet>
+           </p:cellEditor>
+       </p:column>
+ 
+ 
+       <p:column style="width:32px">
+           <p:rowEditor />
+       </p:column>
+   </p:dataTable>
+   
+   
+</h:form>
+</h:body>
+<!-- END BODY -->
+</html>

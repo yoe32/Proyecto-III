@@ -1,11 +1,8 @@
 package bean;
 
-import java.io.IOException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-import org.primefaces.event.FileUploadEvent;
-import dao.*;
 import dao.LoginService;
 import dao.RestaurantService;
 
@@ -25,7 +22,7 @@ public class GlobalBean
 	private byte[] img;
 
 	LoginService ls = new LoginService();
-	GalleryService gs = new GalleryService();
+	
 	RestaurantService rs = new RestaurantService();
 	
 	public void getRestaurantInfo(String email)
@@ -71,18 +68,6 @@ public class GlobalBean
 	}
 	//*******************************************************************************************************//
 	//=======================================================================================================//
-	
-	
-	
-	public void handleFileUpload(FileUploadEvent event) throws IOException 
-	{
-		System.out.println(id);
-		FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-		FacesContext.getCurrentInstance().addMessage(null, message);
-		
-		gs.addImg(0,id, event.getFile().getInputstream(), event.getFile().getFileName());
-		
-	}
 	
 
 	public String getName() {

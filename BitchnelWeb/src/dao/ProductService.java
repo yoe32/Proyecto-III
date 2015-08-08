@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.Blob;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +11,7 @@ import main.Product;
 
 public class ProductService extends Service 
 {
-	public void addMenu(int id, int restaurant_id, String name, String description, double price, Blob picture)
+	public void addProduct(int id, int restaurant_id, String name, String description, double price, InputStream picture)
 	{
 		conectar();
 		
@@ -36,7 +36,7 @@ public class ProductService extends Service
         desconectar();
 	}
 	
-	public void deleteMenu(int restaurant_id, int restaurant_product_id)
+	public void deleteProduct(int restaurant_id, int restaurant_product_id)
 	{
 		conectar();
 		

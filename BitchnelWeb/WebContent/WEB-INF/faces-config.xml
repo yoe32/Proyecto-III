@@ -20,9 +20,29 @@
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>qRCodeController</managed-bean-name>
-		<managed-bean-class>bean.QRCodeController</managed-bean-class>
+		<managed-bean-name>qrCodeBean</managed-bean-name>
+		<managed-bean-class>bean.QRCodeBean</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>galleryBean</managed-bean-name>
+		<managed-bean-class>bean.GalleryBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>mapBean</managed-bean-name>
+		<managed-bean-class>bean.MapBean</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>productBean</managed-bean-name>
+		<managed-bean-class>bean.ProductBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>eventBean</managed-bean-name>
+		<managed-bean-class>bean.EventBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
 	<navigation-rule>

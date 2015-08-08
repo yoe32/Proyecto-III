@@ -16,43 +16,6 @@
 
 	<h:outputScript library="js" name="jquery.qrcode-0.12.0.min.js" />
 
-	<script type="text/javascript">
-		var currentMarker = null;
-
-		function handlePointClick(event) {
-			if (currentMarker === null) {
-				document.getElementById('lat').value = event.latLng.lat();
-				document.getElementById('lng').value = event.latLng.lng();
-
-				currentMarker = new google.maps.Marker({
-					position : new google.maps.LatLng(event.latLng.lat(),
-							event.latLng.lng())
-				});
-
-				PF('map').addOverlay(currentMarker);
-
-				PF('dlg').show();
-			}
-		}
-
-		function markerAddComplete() {
-			var title = document.getElementById('title');
-			currentMarker.setTitle(title.value);
-			title.value = "";
-
-			currentMarker = null;
-			PF('dlg').hide();
-		}
-
-		function cancel() {
-			PF('dlg').hide();
-			currentMarker.setMap(null);
-			currentMarker = null;
-
-			return false;
-		}
-	</script>
-
 </h:head>
 
 <h:body>
@@ -60,92 +23,253 @@
 	<h:form>
 		<p:growl id="messages" />
 
-
 		<p:menubar>
-			<p:menuitem value="Quit" url="http://www.primefaces.org"
-				icon="ui-icon-close" />
-
-			<p:menuitem value="Demos" icon="ui-icon-search" />
-			<p:submenu label="Edit" icon="ui-icon-pencil">
-				<p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />
-				<p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
-			</p:submenu>
-
-			<p:submenu label="Help" icon="ui-icon-help">
-				<p:menuitem value="Contents" url="#" />
-				<p:submenu label="Search" icon="ui-icon-search">
-					<p:submenu label="Text">
-						<p:menuitem value="Workspace" url="#" />
-					</p:submenu>
-					<p:menuitem value="File" url="#" />
-				</p:submenu>
-			</p:submenu>
-
-			<p:submenu label="Actions" icon="ui-icon-gear">
-				<p:submenu label="Ajax" icon="ui-icon-refresh">
-					<p:menuitem value="Save" actionListener="#{menuView.save}"
-						icon="ui-icon-disk" update="messages" />
-					<p:menuitem value="Update" actionListener="#{menuView.update}"
-						icon="ui-icon-arrowrefresh-1-w" update="messages" />
-				</p:submenu>
-				<p:submenu label="Non-Ajax" icon="ui-icon-newwin">
-					<p:menuitem value="Delete" actionListener="#{menuView.delete}"
-						icon="ui-icon-close" update="messages" ajax="false" />
-				</p:submenu>
-			</p:submenu>
-
-			<p:menuitem value="Quit" url="http://www.primefaces.org"
-				icon="ui-icon-close" />
+			<p:menuitem value= "#{globalBean.name}"/>
 
 			<f:facet name="options">
 				<p:inputText style="margin-right:10px" placeholder="Search" />
-				<p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+				<p:commandButton value="Logout" actionListener="#{globalBean.logout()}" />
+				<p:commandButton value="Add" ajax="false"
+								actionListener="#{globalBean.logout()}" disabled="false" />
 			</f:facet>
 		</p:menubar>
 	</h:form>
+	
+	<p:commandButton value="Logout" actionListener="#{globalBean.logout()}" />
 
 	<p:panelGrid columns="1" layout="grid">
 		<h:form>
 
 			<p:panel id="basic" header="Profile" style="margin-bottom:20px">
-				<h:panelGrid columns="4" cellpadding="10">
-					<p:graphicImage name="resources/img/Dejiitaru.png" url="/image" />
-					<ul class="list-group">
-						<li class="list-group-item list-group-item-success">Name: #{global.name}</li>
-						<li class="list-group-item list-group-item-info">Province: #{globalBean.province}</li>
-						<li class="list-group-item list-group-item-warning">Phone I: #{globalBean.phonei}</li>
-						<li class="list-group-item list-group-item-danger">Phone II: #{globalBean.phoneii}</li>
-						<li class="list-group-item list-group-item-success">Phone III: #{globalBean.phoneiii}</li>
-						<li class="list-group-item list-group-item-info">Province: #{globalBean.schedule}</li>
-					</ul>
-					<p:gmap center="9.9916621,-84.0605511" zoom="10" type="ROADMAP"
-						style="width:400px;height:200px" />
+				<h:panelGrid columns="4" cellpadding="5">
 
-					<pe:qrCode id="qrCodeElem"
-						renderMethod="#{qRCodeController.renderMethod}"
-						renderMode="#{qRCodeController.mode}"
-						text="#{qRCodeController.text}" label="#{qRCodeController.label}"
-						size="#{qRCodeController.size}"
-						fillColor="#{qRCodeController.fillColor}" fontName="Ubuntu"
-						fontColor="#01A9DB" ecLevel="H" radius="0.5" />
+					<p:panel id="image" header="Profile Img" style="margin-bottom:20px">
+						<h:panelGrid columns="1" cellpadding="12">
+
+							<p:graphicImage name="resources/img/Dejiitaru.png" url="/image" />
+						</h:panelGrid>
+					</p:panel>
+
+
+					<p:panel id="info" header="User Info"
+						style="margin-bottom:20px;height:100%">
+						<h:panelGrid columns="1" cellpadding="12">
+
+							<h:outputText value="Name: #{globalBean.name}" />
+							<h:outputText value="Province: #{globalBean.province}" />
+							<h:outputText value="Phone I: #{globalBean.phonei}" />
+							<h:outputText value="Phone II: #{globalBean.phoneii}" />
+							<h:outputText value="Phone III: #{globalBean.phoneiii}" />
+						</h:panelGrid>
+					</p:panel>
+
+
+					<p:panel id="map" header="Location" style="margin-bottom:20px">
+						<h:panelGrid columns="1" cellpadding="10">
+							<p:growl id="growl" showDetail="true" />
+
+							<p:gmap id="gmap" center="36.890257,30.707417" zoom="13"
+								type="ROADMAP" model="#{mapBean.simpleModel}"
+								style="width:400px;height:183px">
+								<p:ajax event="overlaySelect"
+									listener="#{mapBean.onMarkerSelect}" update="growl" />
+							</p:gmap>
+
+						</h:panelGrid>
+					</p:panel>
+
+
+					<p:panel id="qr" header="QRCode" style="margin-bottom:20px">
+						<h:panelGrid columns="1" cellpadding="10">
+							<pe:qrCode id="qrCode" renderMethod="#{qrCodeBean.renderMethod}"
+								renderMode="#{qrCodeBean.mode}" text="#{qrCodeBean.text}"
+								label="#{qrCodeBean.label}" size="#{qrCodeBean.size}"
+								fillColor="#{qrCodeBean.fillColor}" fontName="Ubuntu"
+								fontColor="#01A9DB" ecLevel="H" radius="0.5" />
+
+						</h:panelGrid>
+					</p:panel>
+
 				</h:panelGrid>
 			</p:panel>
 		</h:form>
 
-		<h:form>
+		<h:form id="form" enctype="multipart/form-data">
 			<p:panel id="basic" header="Menu" style="margin-bottom:20px">
 				<h:panelGrid columns="2" cellpadding="10">
-					<p:graphicImage name="demo/images/godfather/godfather1.jpg" />
-					<h:outputText value="The story begins as Don Vito Corleone..." />
+
+					<p:panel id="subPanel1" header="Add Product"
+						style="margin-bottom:20px">
+						<h:panelGrid columns="2" cellpadding="3">
+
+							<h:outputLabel value="Name:" style="font-weight:bold" />
+							<p:inputText value="#{productBean.name}" />
+
+							<h:outputLabel value="Description:" style="font-weight:bold" />
+							<p:inputText value="#{productBean.description}" />
+
+							<h:outputLabel value="Price:" style="font-weight:bold" />
+							<p:inputText value="#{productBean.price}" />
+
+							<p:growl id="messages" showDetail="true" />
+
+							<p:fileUpload value="#{productBean.file}" mode="simple"
+								skinSimple="true" />
+
+							<p:commandButton value="Add" ajax="false"
+								actionListener="#{productBean.addProduct()}" disabled="false" />
+
+						</h:panelGrid>
+					</p:panel>
+
+					<p:panel id="subPanel2" header="Edit Product"
+						style="margin-bottom:20px">
+						<h:panelGrid columns="3" cellpadding="3">
+
+							<p:growl id="msgs" showDetail="true" />
+
+							<p:dataTable id="products" var="p"
+								value="#{productBean.showAllProducts()}" editable="true"
+								style="margin-bottom:20px">
+
+								<p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}"
+									update=":form:msgs" />
+								<p:ajax event="rowEditCancel"
+									listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
+
+								<p:column headerText="Product">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{p.name}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText id="modelInput" value="#{p.name}"
+												style="width:100%" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Description">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{p.description}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{p.description}" style="width:100%"
+												label="Year" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Price">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{p.price}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{p.price}" style="width:100%"
+												label="Year" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column style="width:32px">
+									<p:rowEditor />
+								</p:column>
+							</p:dataTable>
+
+						</h:panelGrid>
+					</p:panel>
+
 				</h:panelGrid>
 			</p:panel>
 		</h:form>
 
-		<h:form>
-			<p:panel id="basic" header="Events" style="margin-bottom:20px">
+		<h:form id="formEvent">
+			<p:panel id="events" header="Events" style="margin-bottom:20px">
 				<h:panelGrid columns="2" cellpadding="10">
-					<p:graphicImage name="demo/images/godfather/godfather1.jpg" />
-					<h:outputText value="The story begins as Don Vito Corleone..." />
+					
+
+							<p:panel id="addEvents" header="Add Event"
+						style="margin-bottom:20px">
+						<h:panelGrid columns="2" cellpadding="3">
+
+							<h:outputLabel value="Name:" style="font-weight:bold" />
+							<p:inputText value="#{eventBean.name}" />
+
+							<h:outputLabel value="Description:" style="font-weight:bold" />
+							<p:inputText value="#{eventBean.description}" />
+
+							<h:outputLabel value="Contact:" style="font-weight:bold" />
+							<p:inputText value="#{eventBean.contact}" />
+
+							<p:commandButton value="Add" ajax="false"
+								actionListener="#{eventBean.addEvent()}" disabled="false" />
+
+						</h:panelGrid>
+					</p:panel>
+
+
+					<p:panel id="editEvent" header="Edit Event"
+						style="margin-bottom:20px">
+						<h:panelGrid columns="3" cellpadding="3">
+
+							<p:growl id="msgs" showDetail="true" />
+
+							<p:dataTable id="event" var="e"
+								value="#{eventBean.showAllEvents()}" editable="true"
+								style="margin-bottom:20px">
+
+								<p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}"
+									update=":formEvent:msgs" />
+								<p:ajax event="rowEditCancel"
+									listener="#{dtEditView.onRowCancel}" update=":formEvent:msgs" />
+
+								<p:column headerText="Event">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{e.name}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText id="modelInput" value="#{e.name}"
+												style="width:100%" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Description">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{e.description}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{e.description}" style="width:100%"
+												label="Year" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Contact">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{e.contac}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{e.contact}" style="width:100%"
+												label="Year" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+
+								<p:column style="width:32px">
+									<p:rowEditor />
+								</p:column>
+							</p:dataTable>
+
+						</h:panelGrid>
+					</p:panel>
+
 				</h:panelGrid>
 			</p:panel>
 		</h:form>
@@ -154,49 +278,27 @@
 			<p:panel id="gallery" header="Gallery" style="margin-bottom:20px">
 				<h:panelGrid columns="3" cellpadding="10">
 
-					<p:panel id="subpanel1" header="Slideshow"
-						style="margin-bottom:20px">
-						<h:panelGrid columns="1" cellpadding="10">
-							<p:galleria value="#{imagesView.images}" var="image"
-								panelWidth="500" panelHeight="313" showCaption="true">
-								<p:graphicImage name="demo/images/nature/#{image}"
-									alt="Image Description for #{image}" title="#{image}" />
-							</p:galleria>
-						</h:panelGrid>
-					</p:panel>
 
 					<p:panel id="subpanel2" header="Gallery Table"
 						style="margin-bottom:20px">
 						<h:panelGrid columns="5" cellpadding="10">
 
-							<p:dataTable value="#{tableBean.allImage}" var="item" paginator="true" rows="5"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 60px;" >           
-                <f:facet name="header">
-                        <h:outputText value="Image showing from database" />
-                    </f:facet>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Image Id" />
-                    </f:facet>
-                    <h:outputText value="#{item.imageID}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Image Name" />
-                    </f:facet>
-                    <h:outputText value="#{item.imageName}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Image" />
-                    </f:facet>
-                    <h:outputLink value="DisplayImage?Image_id=#{item.imageID}" target="_blank" >
-                        <h:graphicImage value="DisplayImage?Image_id=#{item.imageID}" width="50" height="50"></h:graphicImage>
-                    </h:outputLink>
- 
-                </p:column>
-            </p:dataTable>
+							<p:dataGrid var="car" value="#{galleryBean.showAllGallery()}"
+								columns="3" layout="grid" rows="12" paginator="true"
+								id="picture"
+								paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="6,12,16">
+
+								<p:panel header="#{picture.restaurant_gallery_id}"
+									style="text-align:center">
+									<h:panelGrid columns="1" style="width:100%">
+
+										<h:outputText value="#{picture.restaurant_picture_name}" />
+
+									</h:panelGrid>
+								</p:panel>
+
+							</p:dataGrid>
 
 						</h:panelGrid>
 					</p:panel>
@@ -205,12 +307,11 @@
 						style="margin-bottom:20px">
 						<h:panelGrid columns="1" cellpadding="10">
 
-							
-					<p:fileUpload fileUploadListener="#{globalBean.handleFileUpload}" mode="advanced" dragDropSupport="true"
-                          update="messages" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
- 
-    <p:growl id="messages" showDetail="true" />
-						
+							<p:fileUpload
+								fileUploadListener="#{galleryBean.handleFileUpload}"
+								mode="advanced" dragDropSupport="true" update="messages"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+							<p:growl id="messages" showDetail="true" />
 
 						</h:panelGrid>
 					</p:panel>
@@ -220,7 +321,8 @@
 		</h:form>
 
 		<h:form>
-			<p:panel id="basic" header="Notifications" style="margin-bottom:20px">
+			<p:panel id="notificatios" header="Notifications"
+				style="margin-bottom:20px">
 				<h:panelGrid columns="2" cellpadding="10">
 					<p:graphicImage name="demo/images/godfather/godfather1.jpg" />
 					<h:outputText value="The story begins as Don Vito Corleone..." />
@@ -231,79 +333,83 @@
 		<p:growl id="messages" showDetail="true" />
 
 		<h:form>
-			<p:panel id="basic" header="Settings" style="margin-bottom:20px">
+			<p:panel id="Settins" header="Settings" style="margin-bottom:20px">
 				<h:panelGrid columns="2" cellpadding="10">
 
-					<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
-						value="Show Map" onclick="PF('dlg').show();" />
+					<p:panel id="subPanel1" header="User Info"
+						style="margin-bottom:20px">
+						<h:panelGrid columns="1" cellpadding="3">
 
-					<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
-						modal="true">
+							<h:panelGrid columns="4" cellpadding="1">
+								<h:outputLabel for="name" value="Name:" style="font-weight:bold" />
+								<p:inputText id="name" value="#{globalBean.name}" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
+							</h:panelGrid>
 
-						<p:gmap id="gmap" center="36.890257,30.707417" zoom="13"
-							type="HYBRID" style="width:100%;height:400px"
-							model="#{addMarkersView.emptyModel}"
-							onPointClick="handlePointClick(event);" widgetVar="map" />
+							<h:panelGrid columns="4" cellpadding="1">
+								<h:outputLabel for="email" value="Email:"
+									style="font-weight:bold" />
+								<p:inputText id="email" value="#{globalBean.email}" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
+							</h:panelGrid>
 
-						<p:dialog widgetVar="dlg" showEffect="fade">
-							<h:form prependId="false">
-								<h:panelGrid columns="2">
-									<h:outputLabel for="title" value="Title:" />
-									<p:inputText id="title" value="#{addMarkersView.title}" />
+							<h:panelGrid columns="4" cellpadding="1">
+								<h:outputLabel for="province" value="Province:"
+									style="font-weight:bold" />
+								<p:inputText id="province" value="#{globalBean.province}" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
+							</h:panelGrid>
 
-									<f:facet name="footer">
-										<p:commandButton value="Add"
-											actionListener="#{addMarkersView.addMarker}"
-											update=":messages" oncomplete="markerAddComplete()" />
-										<p:commandButton value="Cancel" onclick="return cancel()" />
-									</f:facet>
-								</h:panelGrid>
+							<h:panelGrid columns="4" cellpadding="1">
+								<h:outputLabel for="phonei" value="Phone I:"
+									style="font-weight:bold" />
+								<p:inputText id="phonei" value="#{globalBean.phonei}" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
+							</h:panelGrid>
 
-								<h:inputHidden id="lat" value="#{addMarkersView.lat}" />
-								<h:inputHidden id="lng" value="#{addMarkersView.lng}" />
-							</h:form>
-						</p:dialog>
+							<h:panelGrid columns="4" cellpadding="1">
+								<h:outputLabel for="phoneii" value="Phone II:"
+									style="font-weight:bold" />
+								<p:inputText id="phoneii" value="#{globalBean.phoneii}" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
+							</h:panelGrid>
 
-						<script type="text/javascript">
-							var currentMarker = null;
+							<h:panelGrid columns="4" cellpadding="1">
+								<h:outputLabel for="phoneiii" value="Phone III:"
+									style="font-weight:bold" />
+								<p:inputText id="phoneiii" value="#{globalBean.phoneiii}" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
+							</h:panelGrid>
 
-							function handlePointClick(event) {
-								if (currentMarker === null) {
-									document.getElementById('lat').value = event.latLng
-											.lat();
-									document.getElementById('lng').value = event.latLng
-											.lng();
+							<h:panelGrid columns="4" cellpadding="1">
+								<h:outputLabel for="description" value="Description:"
+									style="font-weight:bold" />
+								<p:inputTextarea rows="6" cols="33" id="description"
+									value="#{globalBean.description}" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
+							</h:panelGrid>
 
-									currentMarker = new google.maps.Marker({
-										position : new google.maps.LatLng(
-												event.latLng.lat(),
-												event.latLng.lng())
-									});
+						</h:panelGrid>
+					</p:panel>
 
-									PF('map').addOverlay(currentMarker);
+					<p:panel id="setLocation" header="Set Location"
+						style="margin-bottom:20px">
+						<h:panelGrid columns="1" cellpadding="10">
+							<p:growl id="growl" showDetail="true" />
 
-									PF('dlg').show();
-								}
-							}
+							<p:gmap id="gmap" center="36.890257,30.707417" zoom="13"
+								type="ROADMAP" model="#{mapBean.draggableModel}"
+								style="width:450px;height:293px">
+								<p:ajax event="markerDrag" listener="#{mapBean.onMarkerDrag}"
+									update="growl" />
+							</p:gmap>
 
-							function markerAddComplete() {
-								var title = document.getElementById('title');
-								currentMarker.setTitle(title.value);
-								title.value = "";
+							<p:commandButton value="Save Location" id="ajax" update="growl"
+								actionListener="#{globalBean.logout()}"
+								styleClass="ui-priority-primary" />
+						</h:panelGrid>
+					</p:panel>
 
-								currentMarker = null;
-								PF('dlg').hide();
-							}
-
-							function cancel() {
-								PF('dlg').hide();
-								currentMarker.setMap(null);
-								currentMarker = null;
-
-								return false;
-							}
-						</script>
-					</p:dialog>
 				</h:panelGrid>
 			</p:panel>
 
