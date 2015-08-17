@@ -1,9 +1,18 @@
 package bean;
 
+import dao.ProductService;
 import dao.RestaurantService;
 
 public class RestaurantBean
 {
+	
+	RestaurantService rs = new RestaurantService();
+	ProductService ps = new ProductService();
+	
+	private String remail = Util.getUserName();
+	private String rname = rs.getNameInfo(remail);
+	private int rid = rs.getIdInfo(remail);
+	
 	private String name;
 	private String email = Util.getUserName();
 	private String description;
@@ -15,7 +24,6 @@ public class RestaurantBean
 	private String schedule;
 	private byte[] img;
 	
-	RestaurantService rs = new RestaurantService();
 	
 	public void updateName()
 	{
@@ -44,7 +52,7 @@ public class RestaurantBean
 	
 	public void updateLocation()
 	{
-		
+		rs.updateLocation(rid, location);
 	}
 	
 	public void updatePhonei()
@@ -132,5 +140,29 @@ public class RestaurantBean
 	}
 	public void setImg(byte[] img) {
 		this.img = img;
+	}
+
+	public String getRemail() {
+		return remail;
+	}
+
+	public void setRemail(String remail) {
+		this.remail = remail;
+	}
+
+	public String getRname() {
+		return rname;
+	}
+
+	public void setRname(String rname) {
+		this.rname = rname;
+	}
+
+	public int getRid() {
+		return rid;
+	}
+
+	public void setRid(int rid) {
+		this.rid = rid;
 	}
 }

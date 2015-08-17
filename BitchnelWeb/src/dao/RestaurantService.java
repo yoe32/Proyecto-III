@@ -434,6 +434,26 @@ public class RestaurantService extends Service
 
 		desconectar();
 	}
+	
+	public void updateLocation(int id, String location)
+	{
+		conectar();
+
+		try {
+			PreparedStatement ps = getConexion().prepareStatement("UPDATE restaurant_profile SET restaurant_location WHERE restaurant_profile_id='" + id + "' ");
+			ps.setString(1, location);
+			ps.executeUpdate();
+
+			if (ps != null) {
+				ps.close();
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		desconectar();
+	}
 
 	public void updateEmail()
 	{

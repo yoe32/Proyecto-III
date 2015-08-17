@@ -18,7 +18,7 @@ public class QRCodeBean implements Serializable
     private String label;  
     private int mode;  
     private int size;  
-    private String fillColor;  
+    private String fillColor; 
     
   
     public QRCodeBean() 
