@@ -29,10 +29,14 @@
 			<f:facet name="options">
 				<p:inputText style="margin-right:10px" placeholder="Search" />
 				<p:commandButton value="Logout" actionListener="#{globalBean.logout()}" />
+				<p:commandButton value="Add" ajax="false"
+								actionListener="#{globalBean.logout()}" disabled="false" />
 			</f:facet>
 		</p:menubar>
 	</h:form>
 	
+	<p:commandButton value="Logout" actionListener="#{globalBean.logout()}" />
+
 	<p:panelGrid columns="1" layout="grid">
 		<h:form>
 
@@ -64,7 +68,7 @@
 						<h:panelGrid columns="1" cellpadding="10">
 							<p:growl id="growl" showDetail="true" />
 
-							<p:gmap id="gmap" center="9.9157834,-84.0700541" zoom="13"
+							<p:gmap id="gmap" center="36.890257,30.707417" zoom="13"
 								type="ROADMAP" model="#{mapBean.simpleModel}"
 								style="width:400px;height:183px">
 								<p:ajax event="overlaySelect"
@@ -274,6 +278,7 @@
 			<p:panel id="gallery" header="Gallery" style="margin-bottom:20px">
 				<h:panelGrid columns="3" cellpadding="10">
 
+
 					<p:panel id="subpanel2" header="Gallery Table"
 						style="margin-bottom:20px">
 						<h:panelGrid columns="5" cellpadding="10">
@@ -338,42 +343,42 @@
 							<h:panelGrid columns="4" cellpadding="1">
 								<h:outputLabel for="name" value="Name:" style="font-weight:bold" />
 								<p:inputText id="name" value="#{globalBean.name}" />
-								<p:commandButton value="Edit" icon="ui-icon-check" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
 							</h:panelGrid>
 
 							<h:panelGrid columns="4" cellpadding="1">
 								<h:outputLabel for="email" value="Email:"
 									style="font-weight:bold" />
 								<p:inputText id="email" value="#{globalBean.email}" />
-								<p:commandButton value="Edit" icon="ui-icon-check" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
 							</h:panelGrid>
 
 							<h:panelGrid columns="4" cellpadding="1">
 								<h:outputLabel for="province" value="Province:"
 									style="font-weight:bold" />
 								<p:inputText id="province" value="#{globalBean.province}" />
-								<p:commandButton value="Edit" icon="ui-icon-check" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
 							</h:panelGrid>
 
 							<h:panelGrid columns="4" cellpadding="1">
 								<h:outputLabel for="phonei" value="Phone I:"
 									style="font-weight:bold" />
 								<p:inputText id="phonei" value="#{globalBean.phonei}" />
-								<p:commandButton value="Edit" icon="ui-icon-check" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
 							</h:panelGrid>
 
 							<h:panelGrid columns="4" cellpadding="1">
 								<h:outputLabel for="phoneii" value="Phone II:"
 									style="font-weight:bold" />
 								<p:inputText id="phoneii" value="#{globalBean.phoneii}" />
-								<p:commandButton value="Edit" icon="ui-icon-check" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
 							</h:panelGrid>
 
 							<h:panelGrid columns="4" cellpadding="1">
 								<h:outputLabel for="phoneiii" value="Phone III:"
 									style="font-weight:bold" />
 								<p:inputText id="phoneiii" value="#{globalBean.phoneiii}" />
-								<p:commandButton value="Edit" icon="ui-icon-check" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
 							</h:panelGrid>
 
 							<h:panelGrid columns="4" cellpadding="1">
@@ -381,7 +386,7 @@
 									style="font-weight:bold" />
 								<p:inputTextarea rows="6" cols="33" id="description"
 									value="#{globalBean.description}" />
-								<p:commandButton value="Edit" icon="ui-icon-check" />
+								<p:commandButton value="Submit" icon="ui-icon-check" />
 							</h:panelGrid>
 
 						</h:panelGrid>
@@ -392,7 +397,7 @@
 						<h:panelGrid columns="1" cellpadding="10">
 							<p:growl id="growl" showDetail="true" />
 
-							<p:gmap id="gmap" center="9.9157834,-84.0700541" zoom="13"
+							<p:gmap id="gmap" center="36.890257,30.707417" zoom="13"
 								type="ROADMAP" model="#{mapBean.draggableModel}"
 								style="width:450px;height:293px">
 								<p:ajax event="markerDrag" listener="#{mapBean.onMarkerDrag}"
@@ -400,7 +405,7 @@
 							</p:gmap>
 
 							<p:commandButton value="Save Location" id="ajax" update="growl"
-								actionListener="#{restaurantBean.updateLocation()}"
+								actionListener="#{globalBean.logout()}"
 								styleClass="ui-priority-primary" />
 						</h:panelGrid>
 					</p:panel>
